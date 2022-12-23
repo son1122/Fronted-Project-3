@@ -1,6 +1,5 @@
-import "./Layout.css"
-import Home from "../Home/Home";
-const Layout = () => {
+import "./Home.css"
+const Home = () => {
     return (
         <div className="layout">
                 <Home/>
@@ -17,4 +16,4 @@ const Layout = () => {
     );
 }
   
-export default Layout;
+export default Home;
