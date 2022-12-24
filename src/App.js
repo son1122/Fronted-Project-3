@@ -10,7 +10,7 @@ function App() {
         <Routes>
             <Route path="/order" element={<Layout/>}/>
         </Routes>
-        Main
+        <Layout />
     </div>
   );
 }
