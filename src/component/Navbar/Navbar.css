@@ -1,4 +1,7 @@
 .navbar-grid{
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
+    border-color: #61dafb;
+    border-width: medium;
+    border-style: solid;
 }
