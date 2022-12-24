@@ -1,0 +1,4 @@
+.table-grid{
+    display: grid;
+    grid-template-columns: 80vw auto;
+}
