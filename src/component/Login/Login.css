@@ -1,0 +1,8 @@
+.login-grid{
+    display: grid;
+    grid-template-rows: 60vh auto auto auto;
+}
+.sign-button-grid{
+    display: grid;
+    grid-template-columns: auto auto;
+}

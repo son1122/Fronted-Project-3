@@ -1,0 +1,4 @@
+.table-view-grid{
+    display: grid;
+    grid-template-rows: 10vh auto;
+}
