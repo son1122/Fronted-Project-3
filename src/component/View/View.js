@@ -8,7 +8,7 @@ const View = () => {
         <div >
             {/*<Order/>*/}
             {/*<Dashboard/>*/}
-            <Table/>
+            {/*<Table/>*/}
         </div>
     );
 }

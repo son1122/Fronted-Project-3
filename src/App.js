@@ -12,10 +12,10 @@ function App() {
             <Route path="/order" element={<Layout/>}/>
         </Routes>
         {/*After Login Page*/}
-            <Layout />
+        {/*    <Layout />*/}
 
         {/*Login Page*/}
-        {/*    <Login/>*/}
+            <Login/>
     </div>
   );
 }
