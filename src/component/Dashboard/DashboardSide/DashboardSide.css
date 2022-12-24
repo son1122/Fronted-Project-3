@@ -1,0 +1,4 @@
+.dashboard-side-grid{
+    display: grid;
+    grid-template-rows: auto 50vh auto auto;
+}
