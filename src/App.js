@@ -3,6 +3,7 @@ import "./App.css";
 import {Route, Routes} from "react-router-dom";
 import axios from "axios";
 import Layout from "./component/Layout/Layout";
+import Login from "./component/Login/Login";
 
 function App() {
   return (
@@ -10,7 +11,11 @@ function App() {
         <Routes>
             <Route path="/order" element={<Layout/>}/>
         </Routes>
-        <Layout />
+        {/*After Login Page*/}
+            <Layout />
+
+        {/*Login Page*/}
+        {/*    <Login/>*/}
     </div>
   );
 }
