@@ -1,0 +1,10 @@
+.order-view-grid{
+    display: grid;
+    grid-template-rows: auto auto 60vh auto;
+}
+.slide-horizon{
+    display: inline-block;
+    background-color: #333;
+overflow: auto;
+    white-space: nowrap;
+}

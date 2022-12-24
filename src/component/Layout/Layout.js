@@ -1,20 +1,15 @@
 import "./Layout.css"
-import Home from "../Home/Home";
+import Navbar from "../Navbar/Navbar";
+import View from "../View/View";
+
 const Layout = () => {
     return (
-        <div className="layout">
-                <Home/>
-                <div className="bottom-navbar">
-                    <p>home</p>
-                    <p>home</p>
-                    <p>home</p>
-                    <p>home</p>
-                    <p>home</p>
-                    <p>home</p>
-                </div>
+        <div className={"layout-grid"}>
+            <View/>
+            <Navbar/>
         </div>
 
     );
 }
-  
+
 export default Layout;
