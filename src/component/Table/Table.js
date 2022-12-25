@@ -1,6 +1,6 @@
 import "./Table.css"
-import TableView from "./DashboardView/TableView";
-import TableSide from "./DashboardSide/TableSide";
+import TableView from "./TableView/TableView";
+import TableSide from "./TableSide/TableSide";
 
 const Table = () => {
     return (
