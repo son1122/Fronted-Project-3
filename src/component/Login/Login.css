@@ -1,8 +1,14 @@
 .login-grid{
     display: grid;
-    grid-template-rows: 60vh auto auto auto;
+    grid-template-rows: 60vh auto auto 8vh;
+    justify-content: center;
+    align-items: center;
 }
 .sign-button-grid{
+    height: 7vh;
     display: grid;
     grid-template-columns: auto auto;
+}
+.sign-button{
+    margin-top: 5vh;
 }
