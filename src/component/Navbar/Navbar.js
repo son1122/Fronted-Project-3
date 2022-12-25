@@ -4,10 +4,10 @@ const Navbar = () => {
     return (
         <div className={"navbar-grid"}>
             <p></p>
-            <p>Order</p>
-            <p>Table</p>
-            <p>Dashboard</p>
-            <p>Profile</p>
+            <a href={"/order"}>Main</a>
+            <a href={"/table"}>Table</a>
+            <a href={"/dashboard"}>Dashboard</a>
+            <a href={"/order"}>Profile</a>
             <p></p>
         </div>
     );
