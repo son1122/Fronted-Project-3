@@ -2,9 +2,7 @@
     display: grid;
     grid-template-rows: auto auto 70vh auto;
 }
-.slide-horizon{
-    display: inline-block;
+.order-slide-horizon{
     background-color: #333;
 overflow: auto;
-    white-space: nowrap;
 }

@@ -1,7 +1,7 @@
 
 const OrderSide = () => {
     return (
-        <div>
+        <div className={"order-side-grid"}>
             <p>Order Side</p>
         </div>
     );

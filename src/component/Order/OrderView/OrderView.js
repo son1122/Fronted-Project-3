@@ -10,7 +10,7 @@ const OrderView = () => {
         <div className={"order-view-grid"}>
             <p>Order View</p>
             <p>Search</p>
-            <div className={"slide-horizon"}>
+            <div className={"order-slide-horizon"}>
                     <img style={{width:"300px"}} src={"https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"}/>
                 <img style={{width:"300px"}} src={"https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"}/>
                 <img style={{width:"300px"}} src={"https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"}/>
