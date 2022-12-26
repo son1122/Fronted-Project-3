@@ -1,8 +1,23 @@
-.order-view-grid{
-    display: grid;
-    grid-template-rows: auto auto 70vh auto;
+.order-view-grid {
+  display: grid;
+  grid-template-rows: auto auto 70vh auto;
 }
-.order-slide-horizon{
-    background-color: #333;
-overflow: auto;
+.order-slide-horizon {
+  /* todo: customize scrollbar */
+  background-color: #333;
+  overflow: auto;
+}
+
+.orderview-menu-item {
+  margin: 0.5rem;
+  border-radius: 12px;
+}
+
+.orderview-menu-item:hover {
+  opacity: 80%;
+}
+
+.order-view-category {
+  display: flex;
+  justify-content: space-around;
 }
