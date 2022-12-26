@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import "./App.css";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Layout from "./component/Layout/Layout";
 import Login from "./component/Login/Login";
@@ -9,9 +9,8 @@ import NotFound from "./component/NotFound/NotFound";
 
 function App() {
 
-
-
-    const [login,setLogin]=useState(true)
+    const navigate = useNavigate();
+    const [login,setLogin]=useState(false)
 
     const loginFunc = () => {
         // console.log(localStorage.getItem("jwt"));
@@ -26,28 +25,31 @@ function App() {
         // })
 
     }
-    useEffect((e=>{
-
-
-    }),[login])
+    useEffect(() => {
+            axios.get('http://localhost:3001/auth/verify', {
+                headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+            })
+                .then(res => {
+                    console.log(res);
+                    if(res.status==200){
+                        setLogin(true)
+                    }else {
+                        setLogin(false)
+                        navigate('/login')
+                    }
+                })
+        },
+        [login]
+    );
 
   return (
     <div className="App">
         <Routes>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login setLogin={setLogin}/>} />
-            <Route path="/:page" element={login?<Layout/>:<Login setLogin={setLogin}/>}/>
+            <Route path="/:page" element={<Layout login={login} setLogin={setLogin}/>}/>
             <Route path="*" element={<NotFound/>} />
         </Routes>
-        {/*After Login Page*/}
-        {/*    <Layout />*/}
-
-        {/*Login Page*/}
-        {/*    <Login/>*/}
-        {/*    <Signup/>*/}
-
-        {/*//condition rendering*/}
-        {/*{login?<Layout/>:<Login setLogin={setLogin}/>}*/}
     </div>
   );
 }
