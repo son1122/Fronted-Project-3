@@ -1,8 +1,45 @@
 import "./OrderView.css";
-const OrderView = ({ menuItems, setMenuItemsCategory }) => {
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const OrderView = () => {
+  //Get all menu items and by category.
+  const [menuItems, setMenuItems] = useState([]);
+  const [menuItemsCategory, setMenuItemsCategory] = useState("food");
+  //Searchbar queries.
+  const [itemsSearchQuery, setItemsSearchQuery] = useState("");
+  const [selectMenuItems, setSelectMenuItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`)
+      .then((res) => {
+        console.log("Response Data from Order.js >> ", res.data);
+        setMenuItems(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [menuItemsCategory]);
+
   const handleCategoryChange = (category) => {
     category.preventDefault();
     setMenuItemsCategory(category.target.value);
+  };
+  const handleSearchChange = (query) => {
+    query.preventDefault();
+    setItemsSearchQuery(query.target.value);
+  };
+
+  const handleSearch = (query) => {
+    axios
+      .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`)
+      .then((res) => {
+        setMenuItems(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   let allMenuItems = menuItems.map((menuitem) => {
@@ -18,7 +55,17 @@ const OrderView = ({ menuItems, setMenuItemsCategory }) => {
   return (
     <div className={"order-view-grid"}>
       <p>Order View</p>
-      <p>Search</p>
+      <div className="order-view-search-cont">
+        <input
+          className="order-view-searchbar"
+          type="text"
+          value={itemsSearchQuery}
+          onChange={handleSearchChange}
+        />
+        <button className="order-view-search-btn" onClick={handleSearch}>
+          Search
+        </button>
+      </div>
       <div className={"order-slide-horizon"}>{allMenuItems}</div>
       <div className="order-view-category">
         <button
