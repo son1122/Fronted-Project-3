@@ -18,6 +18,7 @@ const Login = (props) => {
         // })
         if(username=="admin"&&password=="1234"){
             props.setLogin(true)
+            navigate('/order')
         }
     }
 
