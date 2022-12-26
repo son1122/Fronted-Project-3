@@ -3,6 +3,7 @@ const TableSide = () => {
     return (
         <div className={"table-side-grid"}>
             <p>Table Number</p>
+            <p>Table Select</p>
             <div >
                 <div className={"table-side-detail-grid"}>
                     <p>Fry Rice</p>
