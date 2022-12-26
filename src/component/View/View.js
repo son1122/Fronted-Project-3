@@ -9,9 +9,9 @@ const View = () => {
     console.log(page)
     return (
         <div >
-            {page=="order"&&<Order/>}
-            {page=="dashboard"&&<Dashboard/>}
-            {page=="table"&&<Table/>}
+            {page==="order"&&<Order/>}
+            {page==="dashboard"&&<Dashboard/>}
+            {page==="table"&&<Table/>}
         </div>
     );
 }
