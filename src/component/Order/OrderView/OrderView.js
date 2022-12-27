@@ -2,26 +2,13 @@ import "./OrderView.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const OrderView = () => {
-  //Get all menu items and by category.
-  const [menuItems, setMenuItems] = useState([]);
-  const [menuItemsCategory, setMenuItemsCategory] = useState("food");
-  //Searchbar queries.
-  const [itemsSearchQuery, setItemsSearchQuery] = useState("");
-  const [selectMenuItems, setSelectMenuItems] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`)
-      .then((res) => {
-        console.log("Response Data from Order.js >> ", res.data);
-        setMenuItems(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [menuItemsCategory]);
-
+const OrderView = ({
+  menuItems,
+  setMenuItems,
+  setMenuItemsCategory,
+  setItemsSearchQuery,
+  itemsSearchQuery,
+}) => {
   const handleCategoryChange = (category) => {
     category.preventDefault();
     setMenuItemsCategory(category.target.value);
