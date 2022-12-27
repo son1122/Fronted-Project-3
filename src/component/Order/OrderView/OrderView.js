@@ -2,26 +2,17 @@ import "./OrderView.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const OrderView = () => {
-  //Get all menu items and by category.
-  const [menuItems, setMenuItems] = useState([]);
-  const [menuItemsCategory, setMenuItemsCategory] = useState("food");
-  //Searchbar queries.
-  const [itemsSearchQuery, setItemsSearchQuery] = useState("");
-  const [selectMenuItems, setSelectMenuItems] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`)
-      .then((res) => {
-        console.log("Response Data from Order.js >> ", res.data);
-        setMenuItems(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [menuItemsCategory]);
-
+const OrderView = ({
+  menuItems,
+  setMenuItems,
+  setMenuItemsCategory,
+  setItemsSearchQuery,
+  itemsSearchQuery,
+  selectMenuItems,
+  setSelectMenuItems,
+  setTotalPrice,
+  totalPrice,
+}) => {
   const handleCategoryChange = (category) => {
     category.preventDefault();
     setMenuItemsCategory(category.target.value);
@@ -42,13 +33,47 @@ const OrderView = () => {
       });
   };
 
+  const handleSelectMenuItem = (selItem) => {
+    const updatedItem = menuItems.find((item) => item.id === selItem.id);
+    if (!updatedItem.quantity) {
+      updatedItem.quantity = 1;
+    } else {
+      updatedItem.quantity += 1;
+    }
+
+    const checkDuplicate = selectMenuItems.find(
+      (item) => item.id === selItem.id
+    );
+
+    if (checkDuplicate) {
+      const updatedSelectedItems = selectMenuItems.map((item) => {
+        if (item.id === selItem.id) {
+          return updatedItem;
+        }
+        return item;
+      });
+      setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
+    } else {
+      setSelectMenuItems([...selectMenuItems, updatedItem]);
+    }
+    let total = totalPrice;
+    if (updatedItem.quantity === 1) {
+      total += updatedItem.price * updatedItem.quantity;
+    } else {
+      total += updatedItem.price * 1;
+    }
+    setTotalPrice(total);
+  };
+
   let allMenuItems = menuItems.map((menuitem) => {
     return (
       <img
+        key={menuitem.id}
         className="orderview-menu-item"
-        style={{ width: "300px" }}
+        style={{ width: "200px" }}
         src={menuitem.img}
-        alt="menu-item"
+        alt={menuitem.name}
+        onClick={() => handleSelectMenuItem(menuitem)}
       />
     );
   });

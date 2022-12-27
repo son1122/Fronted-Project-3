@@ -1,8 +1,8 @@
-.order-side-grid{
-    display: grid;
-    grid-template-rows: 10vh 70vh 10vh;
+.order-side-grid {
+  display: grid;
+  grid-template-rows: 10vh 70vh 10vh;
 }
-.order-side-detail-grid{
-    display: grid;
-    grid-template-rows: 10vh 50vh 10vh;
+.order-side-detail-grid {
+  display: grid;
+  grid-template-rows: 5vh 55vh 10vh;
 }
