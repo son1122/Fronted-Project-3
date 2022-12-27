@@ -8,6 +8,10 @@ const OrderView = ({
   setMenuItemsCategory,
   setItemsSearchQuery,
   itemsSearchQuery,
+  selectMenuItems,
+  setSelectMenuItems,
+  setTotalPrice,
+  totalPrice,
 }) => {
   const handleCategoryChange = (category) => {
     category.preventDefault();
@@ -29,13 +33,47 @@ const OrderView = ({
       });
   };
 
+  const handleSelectMenuItem = (selItem) => {
+    const updatedItem = menuItems.find((item) => item.id === selItem.id);
+    if (!updatedItem.quantity) {
+      updatedItem.quantity = 1;
+    } else {
+      updatedItem.quantity += 1;
+    }
+
+    const checkDuplicate = selectMenuItems.find(
+      (item) => item.id === selItem.id
+    );
+
+    if (checkDuplicate) {
+      const updatedSelectedItems = selectMenuItems.map((item) => {
+        if (item.id === selItem.id) {
+          return updatedItem;
+        }
+        return item;
+      });
+      setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
+    } else {
+      setSelectMenuItems([...selectMenuItems, updatedItem]);
+    }
+    let total = totalPrice;
+    if (updatedItem.quantity === 1) {
+      total += updatedItem.price * updatedItem.quantity;
+    } else {
+      total += updatedItem.price * 1;
+    }
+    setTotalPrice(total);
+  };
+
   let allMenuItems = menuItems.map((menuitem) => {
     return (
       <img
+        key={menuitem.id}
         className="orderview-menu-item"
-        style={{ width: "300px" }}
+        style={{ width: "200px" }}
         src={menuitem.img}
-        alt="menu-item"
+        alt={menuitem.name}
+        onClick={() => handleSelectMenuItem(menuitem)}
       />
     );
   });

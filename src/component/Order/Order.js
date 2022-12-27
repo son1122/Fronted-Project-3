@@ -11,7 +11,9 @@ const Order = () => {
   //Searchbar queries.
   const [itemsSearchQuery, setItemsSearchQuery] = useState("");
   const [selectMenuItems, setSelectMenuItems] = useState([]);
+  const [quantity, setQuantity] = useState(0);
 
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     axios
       .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`)
@@ -32,8 +34,19 @@ const Order = () => {
         setMenuItemsCategory={setMenuItemsCategory}
         itemsSearchQuery={itemsSearchQuery}
         setItemsSearchQuery={setItemsSearchQuery}
+        selectMenuItems={selectMenuItems}
+        setSelectMenuItems={setSelectMenuItems}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        setTotalPrice={setTotalPrice}
+        totalPrice={totalPrice}
       />
-      <OrderSide />
+      <OrderSide
+        selectMenuItems={selectMenuItems}
+        setSelectMenuItems={setSelectMenuItems}
+        totalPrice={totalPrice}
+        setTotalPrice={setTotalPrice}
+      />
     </div>
   );
 };
