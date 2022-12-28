@@ -58,6 +58,7 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
           .catch((err) => {
             console.log(err);
           });
+        alert("Created Order successfully.");
       }
     };
     checkTable();
@@ -75,6 +76,9 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
             defaultValue={null}
             onChange={(e) => setSelectTable(e.target.value)}
           >
+            <option disabled selected>
+              Select Table
+            </option>
             {tableList}
           </select>
         </div>
