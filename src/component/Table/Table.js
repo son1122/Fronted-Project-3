@@ -8,7 +8,9 @@ const Table = () => {
     
     //Get all table data//
     const [tables, setTables] = useState([]);
+    const [selTable, setSelTable] = useState();
 
+    //Call api from Table data base//
     useEffect(() => {
         axios
           .get(`http://localhost:3001/table`)
@@ -26,7 +28,7 @@ const Table = () => {
     return (
         <div className={"table-grid"}>
             <TableView tables={tables}/>
-            <TableSide/>
+            <TableSide OrderDetail={tables.table_number}/>
         </div>
     );
 }
