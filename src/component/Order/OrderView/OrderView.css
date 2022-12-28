@@ -1,10 +1,33 @@
-.order-view-grid{
-    display: grid;
-    grid-template-rows: auto auto 70vh auto;
+.order-view-grid {
+  display: grid;
+  grid-template-rows: auto 20vh 20vh auto;
+  border: red 1px solid;
 }
-.slide-horizon{
-    display: inline-block;
-    background-color: #333;
-overflow: auto;
-    white-space: nowrap;
+.order-slide-horizon {
+  /* todo: customize scrollbar */
+  background-color: #333;
+  overflow: auto;
+}
+
+.orderview-menu-item {
+  margin: 0.5rem;
+  border-radius: 12px;
+}
+
+.orderview-menu-item:hover {
+  opacity: 80%;
+}
+
+.order-view-category {
+  display: flex;
+  justify-content: space-around;
+}
+
+.order-view-searchbar {
+  background-color: pink;
+  max-height: 5rem;
+}
+
+.order-view-search-btn {
+  background: 1px blue solid;
 }

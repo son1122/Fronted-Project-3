@@ -1,39 +1,70 @@
 import "./Signup.css"
+import {useState} from "react";
+import axios from "axios";
 const Signup = () => {
-    // function validateEmail() {
-    //     const email = document.getElementById('email').value;
-    //     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //     if (regex.test(email)) {
-    //         return true;
-    //     } else {
-    //         alert('Please enter a valid email');
-    //         return false;
-    //     }
-    // }
-    //
-    // //make sure entered password is correct regex
-    // function validatePassword() {
-    //     const regex = /^(?=.*\d)(?=.*[a-z])(?=.* [A-Z]).{6,20}$/;
-    //     if (regex.test(password)) {
-    //         return true;
-    //     } else {
-    //         alert('Password must have at least: 1 lowercase, 1 uppercase, 1 number and be between 6 and 20 characters');
-    //         return false;
-    //     }
-    // }
-    //
-    // //don't let the user submitting their password if it is not valid
-    //
-    // function validateForm() {
-    //     if (validateEmail() && validatePassword()) {
-    //         document.getElementById('submit').disabled = false;
-    //         alert('Please enter a valid email or password');
-    //     }
-    // }
+    const[username,setUsername]=useState("");
+    const[password,setPassword]=useState("");
+    const[confirmPassword,setConfirmPassword]=useState("");
+    const[email,setEmail]=useState("");
+    const[phone,setPhone]=useState("");
+    function validateEmail() {
+        const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (regex.test(email)) {
+            return true;
+        } else {
+            alert('Please enter a valid email');
+            return false;
+        }
+    }
 
+    //make sure entered password is correct regex
+    function validatePassword() {
+        const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if(password===confirmPassword){
+        if (regex.test(password)) {
+            return true;
+        } else {
+            alert('Password must have at least: 1 lowercase, 1 uppercase, 1 number at least 8 character and 1 special character');
+            return false;
+        }}
+        else{
+            alert('password not match')
+        }
+    }
+
+    function validateForm() {
+        if (validateEmail() && validatePassword()) {
+            axios.post(`http://localhost:3001/auth/signup`, {
+                username:username,
+                password:password,
+                email:email,
+                phone:phone,
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+    // admin,password,owner@mail.com,000-000-0000
+
+
+    const signUp=(e)=>{
+        e.preventDefault();
+        validateForm()
+    }
     return (
         <div>
-            <h2>Signup</h2>
+            <form onSubmit={signUp}>
+                <p>Username     : </p><input type="text" name="username" onChange={(e)=>{setUsername(e.target.value)}}/>
+                <p>Password     : </p><input type="text" name="password" onChange={(e)=>{setPassword(e.target.value)}}/>
+                <p>Confirm Pass : </p><input type="text" name="confirmPassword" onChange={(e)=>{setConfirmPassword(e.target.value)}}/>
+                <p>Email        : </p><input type="text" name="email"onChange={(e)=>{setEmail(e.target.value)}}/>
+                <p>Phone Number : </p><input type="text" name="phone" onChange={(e)=>{setPhone(e.target.value)}}/><br></br>
+                <input type="submit" value="SignUp"/>
+            </form>
         </div>
     );
 }
