@@ -23,11 +23,13 @@ const Table = () => {
           });
       }, []);
 
-
+    const onAddNewTable =(newTable)=>{
+        console.log(newTable)
+    }
 
     return (
         <div className={"table-grid"}>
-            <TableView tables={tables}/>
+            <TableView onAddTable={onAddNewTable} tables={tables}/>
             <TableSide OrderDetail={tables.table_number}/>
         </div>
     );

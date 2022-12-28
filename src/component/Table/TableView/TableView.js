@@ -1,24 +1,42 @@
 import "./TableView.css"
-const TableView = (prop) => {
-    const allTables = prop.tables.map(tables => {
+import React, {useState} from "react";
+const TableView = (props) => {
+    
+    const [selTable, setSelTable] = useState()
+
+    const inputSelTable =(event) =>{
+        console.log(event.target.value)
+        setSelTable(event.target.value)
+    }
+
+    const handleSelectTable = (event) => {
+        event.preventDefault()
+        const itemData ={
+            selTable:selTable
+        }
+        console.log(itemData)
+        props.onAddTable(itemData)
+        setSelTable()
+    }
+    
+    
+    
+    const allTables = props.tables.map(tables => {
         return (
 
-            <button>
+            <button type={"submit"} value={tables.table_number} >
                 <p>Table Number : {tables.table_number}</p>
                 <p>Status : {tables.table_status}</p>
             </button>
         )
     })
 
-    const selectTable = () => {
-       console.log("button is working")
-    }
-
     return (
-        <from>
+        <from onClick={handleSelectTable} >
             <div className={"table-view-grid"}>
                 <p>Table View</p>
-                <p onClick={() => selectTable()}>{allTables}</p>
+                <p onClick={
+                    inputSelTable}>{allTables}</p>
             </div>
         </from>
     );
