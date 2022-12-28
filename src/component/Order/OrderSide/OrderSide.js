@@ -30,7 +30,7 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
 
   let selMenuItemList = selectMenuItems.map((item) => {
     return (
-      <div key={item.id} className={"table-side-detail-grid"}>
+      <div key={item.id} className={"order-side-menu-grid"}>
         <p>{item.name}</p>
         <p>{item.quantity}</p>
         <p>{item.price}</p>
@@ -84,12 +84,15 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
         </div>
 
         <div>
-          <div className={"table-side-detail-grid"}>
+          <div className={"order-side-slide"}>
+              <div className={"order-side-menu-grid"}>
             <h3>Name</h3>
             <h3>Quantity</h3>
             <h3>Price</h3>
+              </div>
+              {selMenuItemList}
           </div>
-          {selMenuItemList}
+
         </div>
         <p>Total = {totalPrice}</p>
       </div>
