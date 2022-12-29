@@ -8,7 +8,7 @@
 }
 .order-side-menu-grid {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 40% 20% 40%;
   background: #fff;
   grid-gap: 2px;
   min-height: 0; /* NEW */
