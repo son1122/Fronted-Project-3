@@ -1,4 +1,4 @@
-.order-view-grid{
+.dashboard-view-grid{
     display: grid;
     grid-template-rows: auto auto 70vh auto;
 }
