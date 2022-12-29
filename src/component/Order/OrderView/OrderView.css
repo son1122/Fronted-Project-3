@@ -1,33 +1,111 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+html,
+body {
+  margin: 0;
+  background-color: #2b2d39;
+}
+
+.view-header {
+  color: #fefefe;
+}
 .order-view-grid {
   display: grid;
   grid-template-rows: auto 20vh 20vh auto;
   border: red 1px solid;
 }
 .order-slide-horizon {
-  /* todo: customize scrollbar */
-  background-color: #333;
   overflow: auto;
-}
+  padding: 2.5rem;
 
-.orderview-menu-item {
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+}
+.order-view-item-cont {
+  background-color: #fefefe;
+  height: 270px;
+  width: 200px;
   margin: 0.5rem;
-  border-radius: 12px;
+  text-align: center;
+  font-size: 10px;
+}
+.order-view-menu-item {
+  height: 180px;
+  /* border-radius: 12px; */
 }
 
-.orderview-menu-item:hover {
+.order-view-menu-item:hover {
   opacity: 80%;
 }
 
 .order-view-category {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  border: red 1px solid;
 }
 
-.order-view-searchbar {
-  background-color: pink;
-  max-height: 5rem;
+.order-view-search-cont {
+  display: flex;
+  justify-content: center;
+}
+.label {
+  font-size: 0.625rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: +1.3px;
+  margin-bottom: 1rem;
 }
 
-.order-view-search-btn {
-  background: 1px blue solid;
+.searchBar {
+  width: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#searchQueryInput {
+  width: 100%;
+  height: 2.8rem;
+  background: #f5f5f5;
+  outline: none;
+  border: none;
+  border-radius: 1.625rem;
+  padding: 0 3.5rem 0 1.5rem;
+  font-size: 1rem;
+}
+
+#searchQuerySubmit {
+  width: 3.5rem;
+  height: 2.8rem;
+  margin-left: -3.5rem;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+#searchQuerySubmit:hover {
+  cursor: pointer;
+}
+
+.order-view-category-btn {
+  margin: 0 1rem;
+  height: 100px;
+  width: 150px;
+  outline: none;
+  border: none;
+  background-color: #fefefe;
+}
+
+.order-view-category-btn:hover {
+  opacity: 85%;
+}
+
+#category-food-btn {
+  background-color: #ecd14c;
+}
+
+#category-bev-btn {
+  background-color: #4cd9ec;
 }
