@@ -2,41 +2,29 @@ import "./TableSide.css"
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-const TableSide = (prop) => {
+const TableSide = ({selTable}) => {
 
     const [allTable, setAllTable] = useState([]);
-    const [selectTable, setSelectTable] = useState(null);
+
+    let showTable = selTable
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/table`)
       .then((res) => {
         console.log("ALL TABLE DATA FROM BACKEND >>> ", res.data);
+        console.log(`this is table ${showTable}`)
         setAllTable(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-    
-    let tableList = allTable.map((table) => {
-        return (
-          <option key={table.id} value={table.table_number}>
-            {table.table_number}
-          </option>
-        );
-      });
-      
+  
 
     return (
         <div className={"table-side-grid"}>
-            <p>Table Number</p>
-                <select name="order-side-table-list" form="order-side-form"
-                    onChange={(e) => setSelectTable(e.target.value)}
-                >
-                    {tableList}
-                </select>
-
+            <p>Table Number {showTable}</p>
 
             <div >
                 <div className={"table-side-detail-grid"}>   

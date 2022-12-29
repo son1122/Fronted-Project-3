@@ -23,14 +23,16 @@ const Table = () => {
           });
       }, []);
 
-    const onAddNewTable =(newTable)=>{
-        console.log(newTable)
-    }
-
+      
     return (
-        <div className={"table-grid"}>
-            <TableView onAddTable={onAddNewTable} tables={tables}/>
-            <TableSide OrderDetail={tables.table_number}/>
+        <div className={"table-grid"} onChange={console.log(selTable)}>
+            <TableView 
+                setSelTable={setSelTable} 
+                tables={tables}/>
+            <TableSide 
+              selTable={selTable}
+              setSelTable={setSelTable}
+            />
         </div>
     );
 }
