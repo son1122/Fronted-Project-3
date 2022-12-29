@@ -1,10 +1,10 @@
-.order-view-grid{
-    display: grid;
-    grid-template-rows: auto auto 70vh auto;
+.dashboard-view-grid {
+  display: grid;
+  grid-template-rows: auto auto 70vh auto;
 }
-.dashboard-slide-horizon{
-    display: inline-block;
-    background-color: #333;
-overflow: auto;
-    white-space: nowrap;
+.dashboard-slide-horizon {
+  display: inline-block;
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
 }
