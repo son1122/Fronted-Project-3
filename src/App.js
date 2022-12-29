@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./App.css";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate, Navigate} from "react-router-dom";
 import axios from "axios";
 import Layout from "./component/Layout/Layout";
 import Login from "./component/Login/Login";
@@ -45,6 +45,7 @@ function App() {
   return (
     <div className="App">
         <Routes>
+            <Route path="/" element={ <Navigate to="/login" /> } />
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={<Login setLogin={setLogin}/>} />
             <Route path="/:page" element={<Layout login={login} setLogin={setLogin}/>}/>
