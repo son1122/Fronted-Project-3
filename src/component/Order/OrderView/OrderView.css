@@ -14,6 +14,8 @@ body {
   display: grid;
   grid-template-rows: 10vh 8vh 62vh auto;
   border: red 1px solid;
+  /*max-height: 80vh;*/
+  /*min-height: 60vh;*/
 }
 .order-slide-horizon {
   overflow: auto;
@@ -101,6 +103,11 @@ body {
 
 .order-view-category-btn:hover {
   opacity: 85%;
+}
+.order-view-category {
+  display: flex;
+  justify-content: center;
+  border: red 1px solid;
 }
 
 #category-food-btn {
