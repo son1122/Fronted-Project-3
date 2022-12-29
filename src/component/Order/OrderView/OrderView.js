@@ -23,6 +23,7 @@ const OrderView = ({
   };
 
   const handleSearch = (query) => {
+    query.preventDefault();
     axios
       .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`)
       .then((res) => {
@@ -52,6 +53,7 @@ const OrderView = ({
         }
         return item;
       });
+      //FIXME:
       // For test Purpose FIXME
       setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
     } else {
@@ -68,48 +70,72 @@ const OrderView = ({
 
   let allMenuItems = menuItems.map((menuitem) => {
     return (
-      <img
-        key={menuitem.id}
-        className="orderview-menu-item"
-        style={{ width: "200px" }}
-        src={menuitem.img}
-        alt={menuitem.name}
-        onClick={() => handleSelectMenuItem(menuitem)}
-      />
+      <div className="order-view-item-cont">
+        <img
+          key={menuitem.id}
+          className="order-view-menu-item"
+          style={{ width: "200px" }}
+          src={menuitem.img}
+          alt={menuitem.name}
+          onClick={() => handleSelectMenuItem(menuitem)}
+        />
+        <h2>{menuitem.name}</h2>
+        <h2>฿ {menuitem.price}</h2>
+      </div>
     );
   });
   return (
     <div className={"order-view-grid"}>
-      <p>Order View</p>
+      <h1 className="view-header">Order View</h1>
       <div className="order-view-search-cont">
-        <input
-          className="order-view-searchbar"
-          type="text"
-          value={itemsSearchQuery}
-          onChange={handleSearchChange}
-        />
-        <button className="order-view-search-btn" onClick={handleSearch}>
-          Search
-        </button>
+        <form className="order-view-search-form">
+          <div class="searchBar">
+            <input
+              id="searchQueryInput"
+              type="text"
+              name="searchQueryInput"
+              placeholder="Search"
+              value={itemsSearchQuery}
+              onChange={handleSearchChange}
+            />
+            <button
+              id="searchQuerySubmit"
+              type="submit"
+              name="searchQuerySubmit"
+              onClick={handleSearch}
+            >
+              <svg
+                style={{ width: "24px", height: "24px", viewBox: "0 0 24 24" }}
+              >
+                <path
+                  fill="#666666"
+                  d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
       </div>
       <div className={"order-slide-horizon"}>{allMenuItems}</div>
-      <div className="order-view-category">
-        <button
-          className="order-view-category-btn"
-          id="category-food-btn"
-          value="food"
-          onClick={handleCategoryChange}
-        >
-          Food
-        </button>
-        <button
-          className="order-view-category-btn"
-          id="category-beverage-btn"
-          value="beverage"
-          onClick={handleCategoryChange}
-        >
-          Beverages
-        </button>
+      <div className="order-view-category-cont">
+        <div className="order-view-category">
+          <button
+            className="order-view-category-btn"
+            id="category-food-btn"
+            value="food"
+            onClick={handleCategoryChange}
+          >
+            Food
+          </button>
+          <button
+            className="order-view-category-btn"
+            id="category-bev-btn"
+            value="beverage"
+            onClick={handleCategoryChange}
+          >
+            Beverages
+          </button>
+        </div>
       </div>
     </div>
   );
