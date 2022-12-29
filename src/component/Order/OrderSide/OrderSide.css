@@ -4,7 +4,7 @@
 }
 .order-side-detail-grid {
   display: grid;
-  grid-template-rows: 5vh 10vh 55vh 10vh;
+  grid-template-rows: 5vh 10vh 48vh 10vh;
 }
 .order-side-menu-grid {
   display: grid;
