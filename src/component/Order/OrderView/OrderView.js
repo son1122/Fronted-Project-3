@@ -23,6 +23,7 @@ const OrderView = ({
   };
 
   const handleSearch = (query) => {
+    query.preventDefault();
     axios
       .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`)
       .then((res) => {
@@ -52,6 +53,7 @@ const OrderView = ({
         }
         return item;
       });
+      //FIXME:
       setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
     } else {
       setSelectMenuItems([...selectMenuItems, updatedItem]);
@@ -67,48 +69,60 @@ const OrderView = ({
 
   let allMenuItems = menuItems.map((menuitem) => {
     return (
-      <img
-        key={menuitem.id}
-        className="orderview-menu-item"
-        style={{ width: "200px" }}
-        src={menuitem.img}
-        alt={menuitem.name}
-        onClick={() => handleSelectMenuItem(menuitem)}
-      />
+      <div className="order-view-item-cont">
+        <img
+          key={menuitem.id}
+          className="order-view-menu-item"
+          style={{ width: "250px" }}
+          src={menuitem.img}
+          alt={menuitem.name}
+          onClick={() => handleSelectMenuItem(menuitem)}
+        />
+        <h2>{menuitem.name}</h2>
+      </div>
     );
   });
   return (
     <div className={"order-view-grid"}>
       <p>Order View</p>
       <div className="order-view-search-cont">
-        <input
-          className="order-view-searchbar"
-          type="text"
-          value={itemsSearchQuery}
-          onChange={handleSearchChange}
-        />
-        <button className="order-view-search-btn" onClick={handleSearch}>
-          Search
-        </button>
+        <form className="order-view-search-form">
+          <input
+            type="text"
+            class="search-textbox"
+            placeholder="Search"
+            value={itemsSearchQuery}
+            onChange={handleSearchChange}
+          />
+          <input
+            title="Search"
+            value="⌕"
+            type="submit"
+            class="search-button"
+            onClick={handleSearch}
+          />
+        </form>
       </div>
       <div className={"order-slide-horizon"}>{allMenuItems}</div>
-      <div className="order-view-category">
-        <button
-          className="order-view-category-btn"
-          id="category-food-btn"
-          value="food"
-          onClick={handleCategoryChange}
-        >
-          Food
-        </button>
-        <button
-          className="order-view-category-btn"
-          id="category-beverage-btn"
-          value="beverage"
-          onClick={handleCategoryChange}
-        >
-          Beverages
-        </button>
+      <div className="order-view-category-cont">
+        <div className="order-view-category">
+          <button
+            className="order-view-category-btn"
+            id="category-food-btn"
+            value="food"
+            onClick={handleCategoryChange}
+          >
+            Food
+          </button>
+          <button
+            className="order-view-category-btn"
+            id="button-31"
+            value="beverage"
+            onClick={handleCategoryChange}
+          >
+            Beverages
+          </button>
+        </div>
       </div>
     </div>
   );
