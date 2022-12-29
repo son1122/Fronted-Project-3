@@ -13,6 +13,8 @@ const OrderView = ({
   setTotalPrice,
   totalPrice,
 }) => {
+  const [currentOrder, setCurrentOrder] = useState(null);
+
   const handleCategoryChange = (category) => {
     category.preventDefault();
     setMenuItemsCategory(category.target.value);
@@ -33,6 +35,23 @@ const OrderView = ({
         console.log(err);
       });
   };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/order`)
+      .then((res) => {
+        console.log("Order response in Orderview >>>> ", res.data);
+        const data = res.data;
+        const handleCurrentOrder = () => {
+          // this function will get the latest order in the database and add 1 to make it seem like this is the new order we are creating.
+          setCurrentOrder(data[data.length - 1].id + 1);
+        };
+
+        handleCurrentOrder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleSelectMenuItem = (selItem) => {
     const updatedItem = menuItems.find((item) => item.id === selItem.id);
@@ -55,7 +74,7 @@ const OrderView = ({
       });
       //FIXME:
       // For test Purpose FIXME
-      setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
+      // setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
     } else {
       setSelectMenuItems([...selectMenuItems, updatedItem]);
     }
@@ -70,9 +89,8 @@ const OrderView = ({
 
   let allMenuItems = menuItems.map((menuitem) => {
     return (
-      <div className="order-view-item-cont">
+      <div key={menuitem.id} className="order-view-item-cont">
         <img
-          key={menuitem.id}
           className="order-view-menu-item"
           style={{ width: "200px" }}
           src={menuitem.img}
@@ -86,10 +104,10 @@ const OrderView = ({
   });
   return (
     <div className={"order-view-grid"}>
-      <h1 className="view-header">Order View</h1>
+      <h1 className="view-header">Order Number: {currentOrder}</h1>
       <div className="order-view-search-cont">
         <form className="order-view-search-form">
-          <div class="searchBar">
+          <div className="searchBar">
             <input
               id="searchQueryInput"
               type="text"
