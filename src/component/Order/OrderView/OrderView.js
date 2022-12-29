@@ -54,6 +54,7 @@ const OrderView = ({
         return item;
       });
       //FIXME:
+      // For test Purpose FIXME
       setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
     } else {
       setSelectMenuItems([...selectMenuItems, updatedItem]);

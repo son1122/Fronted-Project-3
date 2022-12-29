@@ -1,6 +1,6 @@
 .order-view-grid {
   display: grid;
-  grid-template-rows: auto 20 20 auto;
+  grid-template-rows: auto 20vh 20vh auto;
   border: red 1px solid;
 }
 .order-slide-horizon {

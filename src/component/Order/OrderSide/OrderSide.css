@@ -6,3 +6,15 @@
   display: grid;
   grid-template-rows: 5vh 55vh 10vh;
 }
+.order-side-menu-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background: #fff;
+  grid-gap: 2px;
+  min-height: 0;  /* NEW */
+  min-width: 0
+}
+.order-side-slide{
+  /*grid-auto-flow: dense;*/
+  /*overflow-y: scroll;*/
+}
