@@ -20,16 +20,6 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   let total = 0;
-  //   if (selectMenuItems.length > 0) {
-  //     selectMenuItems.forEach((item) => {
-  //       total += item.price * item.quantity;
-  //     });
-  //   }
-  //   setTotalPrice(total);
-  // }, [selectMenuItems]);
-
   let tableList = allTable.map((table) => {
     return (
       <option key={table.id} value={table.table_number}>
@@ -40,13 +30,39 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
 
   let selMenuItemList = selectMenuItems.map((item) => {
     return (
-      <div className={"table-side-detail-grid"}>
+      <div key={item.id} className={"order-side-menu-grid"}>
         <p>{item.name}</p>
         <p>{item.quantity}</p>
         <p>{item.price}</p>
       </div>
     );
   });
+  let confirmOrder = () => {
+    console.log("Menu Items >>> ", selectMenuItems);
+    console.log("Select Table >>> ", selectTable);
+    const checkTable = () => {
+      if (selectTable === null) {
+        alert("PLEASE SELECT TABLE");
+      } else {
+        axios
+          .post("http://localhost:3001/order", {
+            menuItems: selectMenuItems,
+            table_number: selectTable,
+            customer_id: null,
+            order_date: new Date(),
+            status: "inprogress",
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        alert("Created Order successfully.");
+      }
+    };
+    checkTable();
+  };
 
   return (
     <div className={"order-side-grid"}>
@@ -57,23 +73,30 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
           <select
             name="order-side-table-list"
             form="order-side-form"
+            defaultValue={null}
             onChange={(e) => setSelectTable(e.target.value)}
           >
+            <option disabled selected>
+              Select Table
+            </option>
             {tableList}
           </select>
         </div>
 
         <div>
-          <div className={"table-side-detail-grid"}>
+          <div className={"order-side-slide"}>
+              <div className={"order-side-menu-grid"}>
             <h3>Name</h3>
             <h3>Quantity</h3>
             <h3>Price</h3>
+              </div>
+              {selMenuItemList}
           </div>
-          {selMenuItemList}
+
         </div>
         <p>Total = {totalPrice}</p>
       </div>
-      <button>Confirm</button>
+      <button onClick={confirmOrder}>Confirm</button>
     </div>
   );
 };
