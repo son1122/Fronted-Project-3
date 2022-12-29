@@ -4,7 +4,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
 import "./OrderSide.css";
-const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
+const OrderSide = ({
+  selectMenuItems,
+  totalPrice,
+  setTotalPrice,
+  setSelectMenuItems,
+}) => {
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
 
@@ -19,6 +24,18 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
         console.log(err);
       });
   }, []);
+  const handleDecRemItem = (id) => {
+    const updatedItems = selectMenuItems
+      .map((menuitem) => {
+        if (menuitem.id === id && menuitem.quantity > 0) {
+          setTotalPrice(totalPrice - menuitem.price);
+          return { ...menuitem, quantity: menuitem.quantity - 1 };
+        }
+        return menuitem;
+      })
+      .filter((menuitem) => menuitem.quantity > 0);
+    setSelectMenuItems(updatedItems);
+  };
 
   let tableList = allTable.map((table) => {
     return (
@@ -34,6 +51,9 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
         <p>{item.name}</p>
         <p>{item.quantity}</p>
         <p>{item.price}</p>
+        <button id="decrement" onClick={() => handleDecRemItem(item.id)}>
+          -
+        </button>
       </div>
     );
   });

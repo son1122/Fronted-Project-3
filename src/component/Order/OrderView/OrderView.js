@@ -66,15 +66,12 @@ const OrderView = ({
     );
 
     if (checkDuplicate) {
-      const updatedSelectedItems = selectMenuItems.map((item) => {
-        if (item.id === selItem.id) {
+      selectMenuItems.map((menuitem) => {
+        if (menuitem.id === selItem.id) {
           return updatedItem;
         }
-        return item;
+        return menuitem;
       });
-      //FIXME:
-      // For test Purpose FIXME
-      // setSelectMenuItems([...selectMenuItems, updatedSelectedItems]);
     } else {
       setSelectMenuItems([...selectMenuItems, updatedItem]);
     }
@@ -86,7 +83,6 @@ const OrderView = ({
     }
     setTotalPrice(total);
   };
-
   let allMenuItems = menuItems.map((menuitem) => {
     return (
       <div key={menuitem.id} className="order-view-item-cont">
