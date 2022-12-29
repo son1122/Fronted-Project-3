@@ -50,10 +50,15 @@ const OrderSide = ({
       <div key={item.id} className={"order-side-menu-grid"}>
         <p>{item.name}</p>
         <p>{item.quantity}</p>
-        <p>{item.price}</p>
-        <button id="decrement" onClick={() => handleDecRemItem(item.id)}>
-          -
-        </button>
+        <p>
+          {item.price}
+          <span>
+            {" "}
+            <button id="decrement" onClick={() => handleDecRemItem(item.id)}>
+              -
+            </button>
+          </span>
+        </p>
       </div>
     );
   });
@@ -97,7 +102,7 @@ const OrderSide = ({
             placeholder="Select Table"
             onChange={(e) => setSelectTable(e.target.value)}
           >
-            <option disabled value={null}>
+            <option selected disabled value={null}>
               Select Table
             </option>
             {tableList}
@@ -112,9 +117,15 @@ const OrderSide = ({
         <div className="order-side-slide">
           <div className={"order-side-detail-container"}>{selMenuItemList}</div>
         </div>
-        <p>Total = {totalPrice}</p>
+        <div className="price-cont">
+          <p className="total-price-label">Total</p>
+          <p className="total-price-label">{totalPrice} Baht</p>
+        </div>
       </div>
-      <button onClick={confirmOrder}>Confirm</button>
+      <div className="order-side-confirm-btn" onClick={confirmOrder}>
+        Confirm
+      </div>
+      {/* <button onClick={confirmOrder}>Confirm</button> */}
     </div>
   );
 };

@@ -54,25 +54,17 @@ const OrderView = ({
   }, []);
 
   const handleSelectMenuItem = (selItem) => {
-    const updatedItem = menuItems.find((item) => item.id === selItem.id);
-    if (!updatedItem.quantity) {
-      updatedItem.quantity = 1;
-    } else {
-      updatedItem.quantity += 1;
-    }
-
-    const checkDuplicate = selectMenuItems.find(
+    const updatedItem = { ...selItem };
+    const existingItemIndex = selectMenuItems.findIndex(
       (item) => item.id === selItem.id
     );
-
-    if (checkDuplicate) {
-      selectMenuItems.map((menuitem) => {
-        if (menuitem.id === selItem.id) {
-          return updatedItem;
-        }
-        return menuitem;
-      });
+    if (existingItemIndex >= 0) {
+      updatedItem.quantity = selectMenuItems[existingItemIndex].quantity + 1;
+      const updatedSelectMenuItems = [...selectMenuItems];
+      updatedSelectMenuItems[existingItemIndex] = updatedItem;
+      setSelectMenuItems(updatedSelectMenuItems);
     } else {
+      updatedItem.quantity = 1;
       setSelectMenuItems([...selectMenuItems, updatedItem]);
     }
     let total = totalPrice;
