@@ -73,26 +73,24 @@ const OrderSide = ({ selectMenuItems, totalPrice, setTotalPrice }) => {
           <select
             name="order-side-table-list"
             form="order-side-form"
-            defaultValue={null}
+            defaultValue={"placeholder"}
+            placeholder="Select Table"
             onChange={(e) => setSelectTable(e.target.value)}
           >
-            <option disabled selected>
+            <option disabled value={null}>
               Select Table
             </option>
             {tableList}
           </select>
         </div>
 
-        <div>
-          <div className={"order-side-slide"}>
-              <div className={"order-side-menu-grid"}>
-            <h3>Name</h3>
-            <h3>Quantity</h3>
-            <h3>Price</h3>
-              </div>
-              {selMenuItemList}
-          </div>
-
+        <div className={"order-side-menu-grid"}>
+          <h3>Name</h3>
+          <h3>Quantity</h3>
+          <h3>Price</h3>
+        </div>
+        <div className="order-side-slide">
+          <div className={"order-side-detail-container"}>{selMenuItemList}</div>
         </div>
         <p>Total = {totalPrice}</p>
       </div>
