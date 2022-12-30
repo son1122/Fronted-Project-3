@@ -13,7 +13,9 @@ const Table = () => {
     //Call api from Table data base//
     useEffect(() => {
         axios
-          .get(`http://localhost:3001/table`)
+          .get(`http://localhost:3001/table`,{
+              headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+          })
           .then((res) => {
             console.log("ALL TABLE DATA FROM BACKEND >>> ", res.data);
             setTables(res.data);

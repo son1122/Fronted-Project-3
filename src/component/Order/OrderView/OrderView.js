@@ -26,7 +26,9 @@ const OrderView = ({
   const handleSearch = (query) => {
     query.preventDefault();
     axios
-      .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`)
+      .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`,{
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+      })
       .then((res) => {
         setMenuItems(res.data);
       })
