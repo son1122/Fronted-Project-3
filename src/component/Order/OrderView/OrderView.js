@@ -140,7 +140,7 @@ const OrderView = ({
             value="food"
             onClick={handleCategoryChange}
           >
-            🍜
+            <img src="https://imgur.com/NiOAJEl.png"></img>
           </button>
           <button
             className="order-view-category-btn"
@@ -148,7 +148,7 @@ const OrderView = ({
             value="beverage"
             onClick={handleCategoryChange}
           >
-            🍹
+            <img src="https://imgur.com/lUiSYuO.png"></img>
           </button>
 
           <button
@@ -157,7 +157,7 @@ const OrderView = ({
             value="desert"
             // onClick={handleCategoryChange}
           >
-            🍨
+            <img src="https://imgur.com/VfPhkvO.png"></img>
           </button>
         </div>
       </div>

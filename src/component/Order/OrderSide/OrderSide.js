@@ -3,17 +3,20 @@ import { tab } from "@testing-library/user-event/dist/tab";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
+import { Button, message } from "antd";
 import "./OrderSide.css";
+import { isCursorAtEnd } from "@testing-library/user-event/dist/utils";
 const OrderSide = ({
   selectMenuItems,
   totalPrice,
   setTotalPrice,
   setSelectMenuItems,
   currentOrder,
+  messageApi,
+  contextHolder,
 }) => {
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
-
   useEffect(() => {
     axios
       .get(`http://localhost:3001/table`)
@@ -90,7 +93,8 @@ const OrderSide = ({
           .catch((err) => {
             console.log(err);
           });
-        alert("Created Order successfully.");
+        // alert("Created Order successfully.");
+        messageApi.info("Created Order Successfully");
       }
     };
     checkTable();
@@ -101,19 +105,21 @@ const OrderSide = ({
       <h2>Order#00{currentOrder}</h2>
       <div className={"order-side-detail-grid"}>
         <div className={"table-selection"}>
-          <label htmlFor="order-side-table-list">Select Table</label>
-          <select
-            name="order-side-table-list"
-            form="order-side-form"
-            defaultValue={"placeholder"}
-            placeholder="Select Table"
-            onChange={(e) => setSelectTable(e.target.value)}
-          >
-            <option selected disabled value={null}>
-              Select Table
-            </option>
-            {tableList}
-          </select>
+          {/* <label htmlFor="order-side-table-list">Select Table</label> */}
+          <div class="custom-select">
+            <select
+              className="order-side-table-list"
+              form="order-side-form"
+              defaultValue={"placeholder"}
+              placeholder="Select Table"
+              onChange={(e) => setSelectTable(e.target.value)}
+            >
+              <option selected disabled value={null}>
+                Select Table
+              </option>
+              {tableList}
+            </select>
+          </div>
         </div>
 
         <div className="order-details-container">
@@ -148,6 +154,10 @@ const OrderSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
+        {contextHolder}
+        <Button type="primary" onClick={confirmOrder}>
+          TEST ANTD
+        </Button>
         <div className="order-side-confirm-btn" onClick={confirmOrder}>
           Confirm
         </div>

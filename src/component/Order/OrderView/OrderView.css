@@ -5,7 +5,8 @@ html,
 body {
   margin: 0;
   color: #212121;
-  background-color: #2b2d39;
+  background-color: #fff;
+  overflow: hidden;
 }
 
 .order-view-header-cont {

@@ -50,7 +50,13 @@
 }
 
 .order-side-table-list {
+  text-align: center;
   height: 50px;
+  width: 300px;
+  border: none;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
 }
 
 .total-price-label {
