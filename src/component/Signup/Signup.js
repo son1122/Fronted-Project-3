@@ -1,12 +1,14 @@
 import "./Signup.css"
 import {useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 const Signup = () => {
     const[username,setUsername]=useState("");
     const[password,setPassword]=useState("");
     const[confirmPassword,setConfirmPassword]=useState("");
     const[email,setEmail]=useState("");
     const[phone,setPhone]=useState("");
+    const navigate = useNavigate();
     function validateEmail() {
         const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (regex.test(email)) {
@@ -41,7 +43,15 @@ const Signup = () => {
                 phone:phone,
             })
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response.data.status);
+                    if(response.data.status=="signUp"){
+                        navigate('/login')
+                    }else{
+                        if("error SequelizeUniqueConstraintError: Validation error"==response.data){
+                            alert("User name is already use")
+                        }else{
+                        alert("error please try again")
+                    }}
                 })
                 .catch(function (error) {
                     console.log(error);
