@@ -21,7 +21,9 @@ const Order = () => {
   const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`)
+      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`,{
+          headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+      })
       .then((res) => {
         console.log("Response Data from Order.js >> ", res.data);
 
@@ -33,7 +35,9 @@ const Order = () => {
   }, [menuItemsCategory]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/order`)
+      .get(`http://localhost:3001/order`,{
+          headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+      })
       .then((res) => {
         console.log("Order response in Orderview >>>> ", res.data);
         const data = res.data;
