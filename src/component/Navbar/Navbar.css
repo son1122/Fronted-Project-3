@@ -1,9 +1,11 @@
 .navbar-grid {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  border-color: #61dafb;
+  background-color: #fff;
+  /* border-color: #61dafb; */
   border-width: medium;
   border-style: solid;
+  border: none;
   height: 10vh;
   align-items: center;
 }
