@@ -3,7 +3,7 @@ import OrderView from "./OrderView/OrderView";
 import OrderSide from "./OrderSide/OrderSide";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Button, message } from "antd";
 const Order = () => {
   //Get all menu items and by category.
   const [menuItems, setMenuItems] = useState([]);
@@ -16,6 +16,9 @@ const Order = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [currentOrder, setCurrentOrder] = useState(null);
+
+  //imported from antd
+  const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     axios
       .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`,{
@@ -67,6 +70,8 @@ const Order = () => {
         serviceCharge={serviceCharge}
         setServiceCharge={setServiceCharge}
         currentOrder={currentOrder}
+        messageApi={messageApi}
+        contextHolder={contextHolder}
       />
       <OrderSide
         selectMenuItems={selectMenuItems}
@@ -76,6 +81,8 @@ const Order = () => {
         serviceCharge={serviceCharge}
         setServiceCharge={setServiceCharge}
         currentOrder={currentOrder}
+        messageApi={messageApi}
+        contextHolder={contextHolder}
       />
     </div>
   );
