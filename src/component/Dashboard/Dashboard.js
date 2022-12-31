@@ -9,6 +9,7 @@ import Customer from "./DashboardView/Customer";
 import Employer from "./DashboardView/Employer";
 import Ingredient from "./DashboardView/Ingredient";
 import Seller from "./DashboardView/Seller";
+import Location from "./DashboardView/Location"
 
 const Dashboard = () => {
     const [select,setSelect]=useState(10)
@@ -22,6 +23,7 @@ const Dashboard = () => {
             {select==4&&<Employer/>}
             {select==5&&<Ingredient/>}
             {select==6&&<Seller/>}
+            {select==7&&<Location/>}
             <DashboardSide setSelect={setSelect}/>
         </div>
     );

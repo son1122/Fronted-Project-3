@@ -1,7 +1,7 @@
 import "./DashboardSide.css"
 import { Card} from 'antd';
 const DashboardSide = (props) => {
-    const num = ["summary","Menu","Order","Customer","Employer.js","Ingredient","Seller"]
+    const num = ["summary","Menu","Order","Customer","Employer.js","Ingredient","Seller","Location"]
     let list = num.map((i,index)=>{
 
         return(
