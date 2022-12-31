@@ -1,11 +1,11 @@
 import "./DashboardSide.css"
 import { Card} from 'antd';
-const DashboardSide = () => {
-    const num = ["summary","Menu","Order","Customer","Employer","Ingredient","Seller"]
-    let list = num.map(i=>{
+const DashboardSide = (props) => {
+    const num = ["summary","Menu","Order","Customer","Employer.js","Ingredient","Seller"]
+    let list = num.map((i,index)=>{
 
         return(
-            <div>
+            <div onClick={()=>{props.setSelect(index)}}>
                 <h2>{i}</h2>
             </div>
         )
