@@ -12,9 +12,11 @@ const OrderSide = ({
   setTotalPrice,
   setSelectMenuItems,
   currentOrder,
-  messageApi,
-  contextHolder,
 }) => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const info = () => {
+    messageApi.info('Hello, Ant Design!');
+  };
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
   useEffect(() => {
@@ -94,7 +96,8 @@ const OrderSide = ({
             console.log(err);
           });
         // alert("Created Order successfully.");
-        messageApi.info("Created Order Successfully");
+        info()
+
       }
     };
     checkTable();
@@ -155,9 +158,10 @@ const OrderSide = ({
       </div>
       <div className="order-side-confirm-btn-cont">
         {contextHolder}
-        <Button type="primary" onClick={confirmOrder}>
+        <Button type="primary" onClick={()=>info}>
           TEST ANTD
         </Button>
+        {contextHolder}
         <div className="order-side-confirm-btn" onClick={confirmOrder}>
           Confirm
         </div>
