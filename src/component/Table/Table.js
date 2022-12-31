@@ -6,11 +6,15 @@ import React, {useState, useEffect} from "react";
 
 const Table = () => {
     
-    //Get all table data//
+    //Get database//
     const [tables, setTables] = useState([]);
-    const [selTable, setSelTable] = useState();
+    const [order, setOrder] = useState();
+    const [orderDetail, setOrderDetail] = useState()
+    
+    // Get value 
+    const [selTable, setSelTable] = useState(0);
 
-    //Call api from Table data base//
+    //Call api from data base//
     useEffect(() => {
         axios
           .get(`http://localhost:3001/table`)
@@ -23,15 +27,44 @@ const Table = () => {
           });
       }, []);
 
+      async function getOrder(){
+        try {
+          let orders = await fetch(`http://localhost:3001/order/table/${selTable}`)
+          let res = await orders.json();
+            console.log("ororororo >>> ", res[0]);
+            setOrder(res[0].id);
+            console.log(selTable, order)        
+        } catch (error) {
+            console.log('err') };
+        }
+
+      useEffect(() => {
+        axios
+          .get(`http://localhost:3001/Order/detail`)
+          .then((res) => {
+            console.log("ALL ORDER DETAIL DATA FROM BACKEND >>> ", res.data);
+            setOrderDetail(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, []);
+
       
     return (
-        <div className={"table-grid"} onChange={console.log(selTable)}>
+        <div className={"table-grid"} onChange={getOrder()}>
             <TableView 
-                setSelTable={setSelTable} 
-                tables={tables}/>
+              setSelTable={setSelTable} 
+              order={order}
+              tables={tables}/>
             <TableSide 
               selTable={selTable}
               setSelTable={setSelTable}
+              order={order}
+              setOrder={setOrder}
+              orderDetail={orderDetail}
+              setOrderDetail={setOrderDetail}
+
             />
         </div>
     );
