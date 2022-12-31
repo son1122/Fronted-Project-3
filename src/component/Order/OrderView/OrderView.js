@@ -12,9 +12,8 @@ const OrderView = ({
   setSelectMenuItems,
   setTotalPrice,
   totalPrice,
+  currentOrder,
 }) => {
-  const [currentOrder, setCurrentOrder] = useState(null);
-
   const handleCategoryChange = (category) => {
     category.preventDefault();
     setMenuItemsCategory(category.target.value);
@@ -27,7 +26,9 @@ const OrderView = ({
   const handleSearch = (query) => {
     query.preventDefault();
     axios
-      .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`)
+      .get(`http://localhost:3001/menu_items/search?q=${itemsSearchQuery}`,{
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+      })
       .then((res) => {
         setMenuItems(res.data);
       })
@@ -35,23 +36,6 @@ const OrderView = ({
         console.log(err);
       });
   };
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/order`)
-      .then((res) => {
-        console.log("Order response in Orderview >>>> ", res.data);
-        const data = res.data;
-        const handleCurrentOrder = () => {
-          // this function will get the latest order in the database and add 1 to make it seem like this is the new order we are creating.
-          setCurrentOrder(data[data.length - 1].id + 1);
-        };
-
-        handleCurrentOrder();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const handleSelectMenuItem = (selItem) => {
     const updatedItem = { ...selItem };
@@ -68,12 +52,15 @@ const OrderView = ({
       setSelectMenuItems([...selectMenuItems, updatedItem]);
     }
     let total = totalPrice;
+
     if (updatedItem.quantity === 1) {
       total += updatedItem.price * updatedItem.quantity;
     } else {
       total += updatedItem.price * 1;
     }
+
     setTotalPrice(total);
+    // setTotalPrice(total);
   };
   let allMenuItems = menuItems.map((menuitem) => {
     return (
@@ -92,8 +79,11 @@ const OrderView = ({
   });
   return (
     <div className={"order-view-grid"}>
-      <h1 className="view-header">Order Number: {currentOrder}</h1>
+      <div className="order-view-header-cont">
+        <p id="view-header-menulabel">Menu Category </p>
+      </div>
       <div className="order-view-search-cont">
+        <p className="view-header">Order#00{currentOrder}</p>
         <form className="order-view-search-form">
           <div className="searchBar">
             <input
@@ -111,12 +101,33 @@ const OrderView = ({
               onClick={handleSearch}
             >
               <svg
-                style={{ width: "24px", height: "24px", viewBox: "0 0 24 24" }}
+                className="search-img"
+                style={{
+                  width: "24px",
+                  height: "21px",
+                  viewBox: "0 0 24 24",
+                  color: "#fff",
+                }}
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#ffffff"
+                stroke="#ffffff"
               >
-                <path
-                  fill="#666666"
-                  d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-                />
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <title>search-solid</title>{" "}
+                  <g id="Layer_2" data-name="Layer 2">
+                    {" "}
+                    <g id="invisible_box" data-name="invisible box">
+                      {" "}
+                    </g>{" "}
+                    <g id="icons_Q2" data-name="icons Q2">
+                      {" "}
+                      <path d="M30.9,28.1a14.8,14.8,0,0,0,3-10.9A15.2,15.2,0,0,0,20.1,4a15,15,0,0,0-3,29.9,15.3,15.3,0,0,0,11-2.9L40.6,43.4a1.9,1.9,0,0,0,2.8,0h0a1.9,1.9,0,0,0,0-2.8ZM20.8,29.9A11,11,0,0,1,8.2,17.1a10.8,10.8,0,0,1,8.9-8.9A10.9,10.9,0,0,1,29.8,20.9,11.1,11.1,0,0,1,20.8,29.9Z"></path>{" "}
+                    </g>{" "}
+                  </g>{" "}
+                </g>
               </svg>
             </button>
           </div>
@@ -131,7 +142,7 @@ const OrderView = ({
             value="food"
             onClick={handleCategoryChange}
           >
-            Food
+            <img src="https://imgur.com/NiOAJEl.png"></img>
           </button>
           <button
             className="order-view-category-btn"
@@ -139,7 +150,16 @@ const OrderView = ({
             value="beverage"
             onClick={handleCategoryChange}
           >
-            Beverages
+            <img src="https://imgur.com/lUiSYuO.png"></img>
+          </button>
+
+          <button
+            className="order-view-category-btn"
+            id="category-bev-btn"
+            value="desert"
+            // onClick={handleCategoryChange}
+          >
+            <img src="https://imgur.com/VfPhkvO.png"></img>
           </button>
         </div>
       </div>

@@ -1,9 +1,31 @@
 .navbar-grid {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  border-color: #61dafb;
+  background-color: #fff;
+  /* border-color: #61dafb; */
   border-width: medium;
   border-style: solid;
+  border: none;
   height: 10vh;
   align-items: center;
+}
+
+.navbar-item-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+  /* background-color: #ccc; */
+  width: 100%;
+  /* border: 1px red solid; */
+}
+
+.navbar-item-cont:hover {
+  opacity: 80%;
+}
+
+.navbar-item-cont > a {
+  text-decoration: none;
+  color: #212121;
 }

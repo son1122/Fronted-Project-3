@@ -1,4 +1,4 @@
-.layout-grid{
+.layout-grid {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: 90vh 10vh;
