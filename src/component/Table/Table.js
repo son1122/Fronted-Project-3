@@ -18,7 +18,7 @@ const Table = () => {
     useEffect(() => {
         axios
           .get(`http://localhost:3001/table`,{
-              headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+              // headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
           })
           .then((res) => {
             console.log("ALL TABLE DATA FROM BACKEND >>> ", res.data);
@@ -29,11 +29,11 @@ const Table = () => {
           });
       }, []);
 
-      async function getOrder(){
+      async function getOrder(selTable){
         try {
           let orders = await fetch(`http://localhost:3001/order/table/${selTable}`)
           let res = await orders.json();
-            console.log("ororororo >>> ", res[0]);
+            console.log("ororororo >>> ", res);
             setOrder(res[0].id);
             console.log(selTable, order)        
         } catch (error) {
@@ -54,7 +54,7 @@ const Table = () => {
 
       
     return (
-        <div className={"table-grid"} onChange={getOrder()}>
+        <div className={"table-grid"} onChange={getOrder(selTable)}>
             <TableView 
               setSelTable={setSelTable} 
               order={order}
