@@ -3,7 +3,6 @@ import { tab } from "@testing-library/user-event/dist/tab";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
-import { Button, message } from "antd";
 import "./OrderSide.css";
 import { isCursorAtEnd } from "@testing-library/user-event/dist/utils";
 const OrderSide = ({
@@ -12,14 +11,16 @@ const OrderSide = ({
   setTotalPrice,
   setSelectMenuItems,
   currentOrder,
-  messageApi,
-  contextHolder,
 }) => {
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/table`)
+      .get(`http://localhost:3001/table`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      })
+
+      // .get(`http://localhost:3001/table`)
       .then((res) => {
         console.log("ALL TABLE DATA FROM BACKEND >>> ", res.data);
         setAllTable(res.data);
@@ -93,20 +94,19 @@ const OrderSide = ({
           .catch((err) => {
             console.log(err);
           });
-        // alert("Created Order successfully.");
-        messageApi.info("Created Order Successfully");
+        alert("Created Order successfully.");
+        // messageApi.info("Created Order Successfully");
       }
     };
     checkTable();
   };
-
   return (
     <div className={"order-side-grid"}>
       <h2>Order#00{currentOrder}</h2>
       <div className={"order-side-detail-grid"}>
         <div className={"table-selection"}>
           {/* <label htmlFor="order-side-table-list">Select Table</label> */}
-          <div class="custom-select">
+          <div className="custom-select">
             <select
               className="order-side-table-list"
               form="order-side-form"
@@ -154,15 +154,10 @@ const OrderSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
-        {contextHolder}
-        <Button type="primary" onClick={confirmOrder}>
-          TEST ANTD
-        </Button>
         <div className="order-side-confirm-btn" onClick={confirmOrder}>
           Confirm
         </div>
       </div>
-      {/* <button onClick={confirmOrder}>Confirm</button> */}
     </div>
   );
 };
