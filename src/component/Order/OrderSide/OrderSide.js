@@ -12,10 +12,7 @@ const OrderSide = ({
   setSelectMenuItems,
   currentOrder,
 }) => {
-  const [messageApi, contextHolder] = message.useMessage();
-  const info = () => {
-    messageApi.info('Hello, Ant Design!');
-  };
+
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
   useEffect(() => {
