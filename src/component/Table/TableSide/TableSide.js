@@ -1,6 +1,7 @@
 import "./TableSide.css"
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { forEach } from "lodash";
 
 
 
@@ -21,16 +22,6 @@ const TableSide = ({selTable, order, setOrder, orderDetail}) => {
   }, []);
 
 //Map menu API
-let menuDetail = 0
-
-menuDetail = menuItem.map(item =>{ 
-  return({
-      id: item.id,
-      name : item.name,
-      price : item.price
-    } 
-    )
-})
 
 // Map orderdetail API 
   let tableOrderDetail = 0
@@ -38,21 +29,39 @@ try {
   tableOrderDetail = orderDetail.map(item =>{ 
   // use if to fillter orderdetail by order id
     if(item.order_id == order){
-      return(<div key={item.id}>
-        {item.order_id}
-        {item.menu_item_id}
-        {item.quantity}
-      </div>
-        
-      
+
+      // Get menu name by order detail 
+      let menuDetail = 0
+       
+      menuDetail = menuItem.map(food =>{ 
+        if(item.menu_item_id == food.id){
+        return({
+          name : food.name,
+          price : food.price
+          })
+        }}
       )
+  // sent back to page
+      return(<div key={item.id}>
+        {menuDetail[item.menu_item_id-1].name}
+        {item.quantity}
+        {menuDetail[item.menu_item_id-1].price}
+      </div>
+      )
+    }else{return(
+      <div></div>
+    )
     }
+
+
+
   })
    
 
 
 } catch (error) {
 }
+
 
     return (
         <div className={"table-side-grid"}>
@@ -63,6 +72,8 @@ try {
 
                     <p>Order detail </p>
                     {tableOrderDetail}
+                    
+                    
                 </div>  
             </div>
             <p>Total Price</p>
