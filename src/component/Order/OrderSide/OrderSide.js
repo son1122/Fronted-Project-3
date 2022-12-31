@@ -12,6 +12,7 @@ const OrderSide = ({
   setSelectMenuItems,
   currentOrder,
 }) => {
+
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
   useEffect(() => {
