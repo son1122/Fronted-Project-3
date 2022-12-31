@@ -5,7 +5,7 @@ import { forEach } from "lodash";
 
 
 
-const TableSide = ({selTable, order, setOrder, orderDetail}) => {
+const TableSide = ({selTable, order, orderDetail}) => {
 
   const [menuItem , setMenuItem] = useState([])
 
@@ -21,17 +21,18 @@ const TableSide = ({selTable, order, setOrder, orderDetail}) => {
       });
   }, []);
 
-//Map menu API
+  
 
 // Map orderdetail API 
   let tableOrderDetail = 0
 try {
   tableOrderDetail = orderDetail.map(item =>{ 
   // use if to fillter orderdetail by order id
-    if(item.order_id == order){
-
-      // Get menu name by order detail 
-      let menuDetail = 0
+    
+  if(item.order_id != order){
+    console.log("On Order");
+  }else{ 
+      let menuDetail = 0                    // Get menu name by order detail
        
       menuDetail = menuItem.map(food =>{ 
         if(item.menu_item_id == food.id){
@@ -41,33 +42,45 @@ try {
           })
         }}
       )
+
   // sent back to page
       return(<div key={item.id}>
-        {menuDetail[item.menu_item_id-1].name}
-        {item.quantity}
-        {menuDetail[item.menu_item_id-1].price}
-      </div>
+        Name : {menuDetail[item.menu_item_id-1].name}
+        quantity: {item.quantity}
+        Price: {menuDetail[item.menu_item_id-1].price}
+      </div> 
       )
-    }else{return(
-      <div></div>
-    )
     }
-
-
-
-  })
-   
-
-
+})
 } catch (error) {
 }
 
+let checkOut = () => {
+  const clearOrder= ()=> {
+  if (order === null) {
+    alert("NO ORDER PLEASE SELECT TABLE");
+  }else{
+      axios
+        .put(`http://localhost:3001/order/${order}`, {
+          status: "completed",
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      alert("Thank You");
+      // messageApi.info("Created Order Successfully");
+      }
+  }
+  clearOrder()
+}
 
-    return (
-        <div className={"table-side-grid"}>
-            <p>Table Number {selTable}</p>
-
-            <div>
+  return (
+      <div className={"table-side-grid"}>
+          <p>Table Number {selTable}</p>
+          <div>
                 <div className={"table-side-detail-grid"} >   
 
                     <p>Order detail </p>
@@ -76,8 +89,8 @@ try {
                     
                 </div>  
             </div>
-            <p>Total Price</p>
-            <button>Check Button</button>
+            <p>Total Price </p>
+            <button type="button" onClick={checkOut}>Check Button</button>
         </div>
     );
 }
