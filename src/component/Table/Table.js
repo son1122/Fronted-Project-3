@@ -34,7 +34,7 @@ const Table = () => {
           let orders = await fetch(`http://localhost:3001/order/table/${selTable}`)
           let res = await orders.json();
             console.log("ororororo >>> ", res);
-            setOrder(res[0].id);
+            setOrder(res[0].id);  
             console.log(selTable, order)        
         } catch (error) {
             console.log('err') };
@@ -42,7 +42,7 @@ const Table = () => {
 
       useEffect(() => {
         axios
-          .get(`http://localhost:3001/Order/detail`)
+          .get(`http://localhost:3001/Order/detail/`)
           .then((res) => {
             console.log("ALL ORDER DETAIL DATA FROM BACKEND >>> ", res.data);
             setOrderDetail(res.data);

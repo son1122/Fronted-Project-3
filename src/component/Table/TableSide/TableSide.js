@@ -32,34 +32,37 @@ menuDetail = menuItem.map(item =>{
     )
 })
 
-// Map orderdetail API
+// Map orderdetail API 
   let tableOrderDetail = 0
 try {
   tableOrderDetail = orderDetail.map(item =>{ 
-    return({
-        id: item.order_id,
-        menuItemId : item.menu_item_id,
-        quantity : item.quantity
-      } 
+  // use if to fillter orderdetail by order id
+    if(item.order_id == order){
+      return(<div key={item.id}>
+        {item.order_id}
+        {item.menu_item_id}
+        {item.quantity}
+      </div>
+        
+      
       )
+    }
   })
+   
 
 
 } catch (error) {
-
 }
-
 
     return (
         <div className={"table-side-grid"}>
             <p>Table Number {selTable}</p>
 
             <div>
-                <div className={"table-side-detail-grid"}>   
+                <div className={"table-side-detail-grid"} >   
 
                     <p>Order detail </p>
-                    <p>{menuItem.id}</p>
-                    {console.log(tableOrderDetail , menuDetail)}
+                    {tableOrderDetail}
                 </div>  
             </div>
             <p>Total Price</p>
