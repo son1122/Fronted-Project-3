@@ -1,6 +1,7 @@
 import "./TableSide.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { forEach } from "lodash";
 
 const TableSide = ({
   setSelTable,
@@ -16,6 +17,7 @@ const TableSide = ({
 }) => {
   const [menuItem, setMenuItem] = useState([]);
 
+  // Get Menu from data base
   useEffect(() => {
     axios
       .get(`http://localhost:3001/menu_items`)
