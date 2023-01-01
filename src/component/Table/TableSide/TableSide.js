@@ -1,13 +1,21 @@
-import "./TableSide.css"
-import React, {useState, useEffect} from "react";
+import "./TableSide.css";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { forEach } from "lodash";
 
-
-
-const TableSide = ({selTable, order, orderDetail}) => {
-
-  const [menuItem , setMenuItem] = useState([])
+const TableSide = ({
+  setSelTable,
+  order,
+  tables,
+  setTables,
+  setOrder,
+  orderDetail,
+  setOrderDetail,
+  selTable,
+  tableOrderDetailState,
+  setTableOrderDetail,
+}) => {
+  const [menuItem, setMenuItem] = useState([]);
 
   // Get Menu from data base
   useEffect(() => {
@@ -22,81 +30,54 @@ const TableSide = ({selTable, order, orderDetail}) => {
       });
   }, []);
 
-  
+  //Map menu API
+  let menuDetail = 0;
 
-// Map orderdetail API 
-  let tableOrderDetail = 0
-try {
-  tableOrderDetail = orderDetail.map(item =>{ 
-  // use if to fillter orderdetail by order id
-    
-  if(item.order_id != order){
-    console.log("On Order");
-  }else{ 
-      let menuDetail = 0                    // Get menu name by order detail
-       
-      menuDetail = menuItem.map(food =>{ 
-        if(item.menu_item_id == food.id){
-        return({
-          name : food.name,
-          price : food.price
-          })
-        }}
-      )
+  menuDetail = menuItem.map((item) => {
+    return {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+    };
+  });
 
-  // sent back to page
-      return(<div key={item.id}>
-        Name : {menuDetail[item.menu_item_id-1].name}
-        quantity: {item.quantity}
-        Price: {menuDetail[item.menu_item_id-1].price}
-      </div> 
-      )
-    }
-})
-} catch (error) {
-}
+  const allOrderDetailDataFromTable = tableOrderDetailState.map((item, key) => {
+    return (
+      <div key={key}>
+        <p>Name: {item.name}</p>
+        <p>Price: {item.price}</p>
+        <p>Quantity: {item.quantity}</p>
+      </div>
+    );
+  });
 
-// Create Chck Out Button function
-let checkOut = () => {
-  const clearOrder= ()=> {
-  if (order === 0) {
-    alert("NO ORDER PLEASE SELECT TABLE");
-  }else{
-      axios
-        .put(`http://localhost:3001/order/${order}`, {
-          status: "completed",
-        })
-        .then((res) => {
-          console.log(res.data);
-          alert("Thank You");
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Error");
-
-        });
-      
-      // messageApi.info("Created Order Successfully");
-      }
-  }
-  clearOrder()
-}
+  // Map orderdetail API
+  // let tableOrderDetail = 0;
+  // try {
+  //   tableOrderDetail = orderDetail.map((item) => {
+  //     return {
+  //       id: item.order_id,
+  //       menuItemId: item.menu_item_id,
+  //       quantity: item.quantity,
+  //     };
+  //   });
+  // } catch (error) {}
 
   return (
-      <div className={"table-side-grid"}>
-          <p>Table Number {selTable}</p>
-          <div>
-                <div className={"table-side-detail-grid"} >   
+    <div className={"table-side-grid"}>
+      <p>Table Number {selTable}</p>
 
-                    <p>Order detail </p>
-                    {tableOrderDetail}
-                    
-                    
-                </div>  
-            </div>
-            <p>Total Price </p>
-            <button type="button" onClick={checkOut}>Check Button</button>
+      <div>
+        <div className={"table-side-detail-grid"}>
+          <p>Order detail </p>
+          {allOrderDetailDataFromTable}
+          {/* <p>{menuItem.id}</p> */}
+          {/* {console.log(tableOrderDetail, menuDetail)} */}
         </div>
-    );
-}
+      </div>
+      <p>Total Price</p>
+      <button>Check Button</button>
+    </div>
+  );
+};
 export default TableSide;
