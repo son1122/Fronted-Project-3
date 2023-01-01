@@ -60,7 +60,6 @@ const OrderView = ({
     }
 
     setTotalPrice(total);
-    // setTotalPrice(total);
   };
   let allMenuItems = menuItems.map((menuitem) => {
     return (

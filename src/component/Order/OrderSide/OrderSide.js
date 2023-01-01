@@ -12,7 +12,6 @@ const OrderSide = ({
   setSelectMenuItems,
   currentOrder,
 }) => {
-
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
   useEffect(() => {
@@ -96,6 +95,7 @@ const OrderSide = ({
             console.log(err);
           });
         alert("Created Order successfully.");
+        setSelectMenuItems([]);
         // messageApi.info("Created Order Successfully");
       }
     };
