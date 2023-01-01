@@ -14,9 +14,10 @@ const OrderView = ({
   totalPrice,
   currentOrder,
 }) => {
-  const handleCategoryChange = (category) => {
-    category.preventDefault();
-    setMenuItemsCategory(category.target.value);
+  const handleCategoryChange = (event, category) => {
+    event.preventDefault();
+    setMenuItemsCategory(category);
+    // console.log(`Selected category: ${category.target.value}`);
   };
   const handleSearchChange = (query) => {
     query.preventDefault();
@@ -63,13 +64,16 @@ const OrderView = ({
   };
   let allMenuItems = menuItems.map((menuitem) => {
     return (
-      <div key={menuitem.id} className="order-view-item-cont">
+      <div
+        key={menuitem.id}
+        className="order-view-item-cont"
+        onClick={() => handleSelectMenuItem(menuitem)}
+      >
         <img
           className="order-view-menu-item"
           style={{ width: "200px" }}
           src={menuitem.img}
           alt={menuitem.name}
-          onClick={() => handleSelectMenuItem(menuitem)}
         />
         <h2>{menuitem.name}</h2>
         <h2>฿ {menuitem.price}</h2>
@@ -139,17 +143,23 @@ const OrderView = ({
             className="order-view-category-btn"
             id="category-food-btn"
             value="food"
-            onClick={handleCategoryChange}
+            onClick={(event) => handleCategoryChange(event, "food")}
           >
-            <img src="https://imgur.com/NiOAJEl.png"></img>
+            <img
+              src="https://imgur.com/NiOAJEl.png"
+              onClick={(event) => handleCategoryChange(event, "food")}
+            ></img>
           </button>
           <button
             className="order-view-category-btn"
             id="category-bev-btn"
             value="beverage"
-            onClick={handleCategoryChange}
+            onClick={(event) => handleCategoryChange(event, "beverage")}
           >
-            <img src="https://imgur.com/lUiSYuO.png"></img>
+            <img
+              src="https://imgur.com/lUiSYuO.png"
+              onClick={(event) => handleCategoryChange(event, "beverage")}
+            ></img>
           </button>
 
           <button

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { forEach } from "lodash";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const TableSide = ({
   setSelTable,
   order,
@@ -29,6 +31,52 @@ const TableSide = ({
         console.log(err);
       });
   }, []);
+
+  const notiSelTable = () => {
+    toast.info(`Selected Table: ${selTable}`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const checkoutSuccess = () => {
+    toast.success(`Payment Succeed`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  const checkoutFailed = () => {
+    toast.error(`Payment Failed`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  useEffect(() => {
+    if (!selTable) {
+      console.log("no sel table");
+    } else {
+      notiSelTable();
+    }
+  }, [selTable]);
 
   //Map menu API
   const totalPrice = tableOrderDetailState.reduce((sum, item) => {
@@ -69,7 +117,7 @@ const TableSide = ({
   // } catch (error) {}
 
   const handleCheckout = () => {
-    alert("Payment success");
+    checkoutSuccess();
     setTableOrderDetail([]);
     axios
       .put(`http://localhost:3001/order/status/${selTable}`)
@@ -77,6 +125,7 @@ const TableSide = ({
         console.log("update test >", res);
       })
       .catch((err) => {
+        checkoutFailed();
         console.log("update err >", err);
       });
   };
@@ -171,6 +220,7 @@ const TableSide = ({
           Checkout
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
