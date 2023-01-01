@@ -9,6 +9,7 @@ const TableSide = ({selTable, order, orderDetail}) => {
 
   const [menuItem , setMenuItem] = useState([])
 
+  // Get Menu from data base
   useEffect(() => {
     axios
       .get(`http://localhost:3001/menu_items`)
@@ -55,9 +56,10 @@ try {
 } catch (error) {
 }
 
+// Create Chck Out Button function
 let checkOut = () => {
   const clearOrder= ()=> {
-  if (order === null) {
+  if (order === 0) {
     alert("NO ORDER PLEASE SELECT TABLE");
   }else{
       axios
@@ -66,11 +68,14 @@ let checkOut = () => {
         })
         .then((res) => {
           console.log(res.data);
+          alert("Thank You");
         })
         .catch((err) => {
           console.log(err);
+          alert("Error");
+
         });
-      alert("Thank You");
+      
       // messageApi.info("Created Order Successfully");
       }
   }
