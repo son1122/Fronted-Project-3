@@ -1,5 +1,7 @@
 import axios from "axios";
 import "./TableView.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const TableView = ({
   setSelTable,
   order,

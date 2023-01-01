@@ -6,12 +6,16 @@
 }
 
 .table-slide-horizon {
-  overflow: auto;
+  overflow: scroll;
   padding: 2.5rem;
   justify-content: flex-start;
   display: flex;
   flex-wrap: wrap;
   background-color: #fafafa;
+}
+
+.table-slide-horizon::-webkit-scrollbar {
+  display: none;
 }
 
 .table-view-item-cont {

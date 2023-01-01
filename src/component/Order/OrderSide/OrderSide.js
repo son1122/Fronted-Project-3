@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
 import "./OrderSide.css";
 import { isCursorAtEnd } from "@testing-library/user-event/dist/utils";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const OrderSide = ({
   selectMenuItems,
   totalPrice,
@@ -73,12 +76,40 @@ const OrderSide = ({
       </div>
     );
   });
+  const notiSuccess = () => {
+    toast.success(`Created Order: ${currentOrder} Successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  const notiFailed = () => {
+    toast.error(
+      `Failed to create Order: ${currentOrder} Please Select a table`,
+      {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+  };
   let confirmOrder = () => {
     console.log("Menu Items >>> ", selectMenuItems);
     console.log("Select Table >>> ", selectTable);
     const checkTable = () => {
       if (selectTable === null) {
-        alert("PLEASE SELECT TABLE");
+        // alert("PLEASE SELECT TABLE");
+        notiFailed();
       } else {
         axios
           .post("http://localhost:3001/order", {
@@ -94,7 +125,8 @@ const OrderSide = ({
           .catch((err) => {
             console.log(err);
           });
-        alert("Created Order successfully.");
+        // alert("Created Order successfully.");
+        notiSuccess();
         setSelectMenuItems([]);
         // messageApi.info("Created Order Successfully");
       }
@@ -155,10 +187,20 @@ const OrderSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
-        <div className="order-side-confirm-btn" onClick={confirmOrder}>
+        {/* <div className="order-side-confirm-btn" onClick={confirmOrder}>
+          Confirm
+        </div>
+         */}
+        <div
+          className="order-side-confirm-btn"
+          onClick={() => {
+            confirmOrder();
+          }}
+        >
           Confirm
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

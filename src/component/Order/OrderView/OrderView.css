@@ -58,8 +58,10 @@ body {
   /* border-radius: 12px; */
 }
 
-.order-view-menu-item:hover {
+.order-view-item-cont:hover {
   opacity: 80%;
+  transition: 0.5s;
+  cursor: pointer;
 }
 .order-view-category {
   height: 100%;
