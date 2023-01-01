@@ -5,10 +5,24 @@ import { DecompositionTreeGraph } from '@ant-design/graphs';
 import axios from "axios";
 
 const Menu = () => {
-
+    const [menuItem,setMenuitem]=useState(<option value="loading">Loading</option>)
+    const items = [
+        {
+            label: '1st menu item',
+            key: '1',
+        },
+        {
+            label: '2nd menu item',
+            key: '2',
+        },
+        {
+            label: '3rd menu item',
+            key: '3',
+        },
+    ];
     const [data,setData] = useState( {
         value: {
-            title: 'Fried test Rice',
+            title: 'Please Select Menu',
             items:{
                 text : "Price",
                 value: "100"
@@ -82,12 +96,34 @@ const Menu = () => {
         })
     })}
     useEffect(() => {
+        const select = axios.get('http://localhost:3001/dashboard/menuitem',{
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+        }).then(resu=>{
 
-    },[data,config]);
+            console.log(resu)
+                let data = resu.data.map((name,index)=>{
+                    console.log(name)
+                    return(
+                    <option value={name.name} key={index}>{name.name}</option>
+                    )
+                })
+            console.log(data)
+            setMenuitem(data)
+        })
+    },[]);
 
+    <option value="audi">Audi</option>
         return(
             <div className={"grid28"}>
-                <p onClick={select}>Menu Select</p>
+                <div>
+                    <h1>Menu Ingredient View</h1>
+                    <form onSubmit>
+                    <select name="<menu>" id="menu">
+                        {menuItem}
+                    </select>
+                        <input type={"submit"} name={"Submit"}/>
+                    </form>
+                </div>
                 <DecompositionTreeGraph {...config}/>;
             </div>
         )
