@@ -1,4 +1,46 @@
-.table-view-grid{
-    display: grid;
-    grid-template-rows: 10vh auto;
+.table-view-grid {
+  display: grid;
+  grid-template-rows: 10vh auto;
+
+  /* grid-template-rows: 10vh 8vh 62vh auto; */
+}
+
+.table-slide-horizon {
+  overflow: scroll;
+  padding: 2.5rem;
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fafafa;
+}
+
+.table-slide-horizon::-webkit-scrollbar {
+  display: none;
+}
+
+.table-view-item-cont {
+  background-color: #ff2531;
+  color: #fff;
+  height: 300px;
+  width: 300px;
+  margin: 0.5rem;
+  text-align: center;
+  font-size: 10px;
+  -moz-box-shadow: 0 0 5px #000;
+  -webkit-box-shadow: 0 0 5px #000;
+  box-shadow: 0 0 5px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-view-item-cont:hover {
+  opacity: 80%;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+#table-view-table-label {
+  color: #fff;
+  font-size: 50px;
 }

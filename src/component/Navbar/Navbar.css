@@ -1,6 +1,6 @@
 .navbar-grid {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto;
   background-color: #fff;
   /* border-color: #61dafb; */
   border-width: medium;
@@ -8,6 +8,7 @@
   border: none;
   height: 10vh;
   align-items: center;
+  z-index: 3;
 }
 
 .navbar-item-cont {
@@ -22,6 +23,7 @@
 }
 
 .navbar-item-cont:hover {
+  transition: 0.5s;
   opacity: 80%;
 }
 
