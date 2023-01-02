@@ -24,7 +24,6 @@ const TableSide = ({
     axios
       .get(`http://localhost:3001/menu_items`)
       .then((res) => {
-        console.log("ALL menu DATA FROM BACKEND >>> ", res.data);
         setMenuItem(res.data);
       })
       .catch((err) => {
@@ -72,7 +71,6 @@ const TableSide = ({
 
   useEffect(() => {
     if (!selTable) {
-      console.log("no sel table");
     } else {
       notiSelTable();
     }
@@ -84,7 +82,7 @@ const TableSide = ({
   }, 0);
   const allOrderDetailDataFromTable = tableOrderDetailState.map((item, key) => {
     return (
-      <div key={item.id} className={"order-side-menu-grid"}>
+      <div key={key} className={"order-side-menu-grid"}>
         <img
           src={item.img}
           className={"order-side-menu-img"}
