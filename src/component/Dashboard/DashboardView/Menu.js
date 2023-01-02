@@ -5,6 +5,7 @@ import { DecompositionTreeGraph } from '@ant-design/graphs';
 import axios from "axios";
 
 const Menu = () => {
+    const [select, setSelect] = useState();
     const [menuItem,setMenuitem]=useState(<option value="loading">Loading</option>)
     const items = [
         {
@@ -47,8 +48,11 @@ const Menu = () => {
             autoWidth:true,
         }
     })
-    const select =()=>{
-    axios.get("http://localhost:3001/dashboard/menu",{
+    const handleChangeSelect = (e) => {
+        setSelect(e.target.value);
+    };
+    const getData =()=>{
+    axios.get(`http://localhost:3001/dashboard/menu/${select}`,{
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
     }).then(res=>{
         console.log(res.data)
@@ -96,7 +100,38 @@ const Menu = () => {
         })
     })}
     useEffect(() => {
-        const select = axios.get('http://localhost:3001/dashboard/menuitem',{
+            // if (select !== undefined) {
+            //     axios
+            //         .get(`http://localhost:3001/customer/data/${select}`, {
+            //             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+            //         })
+            //         .then((resu) => {
+            //             console.log(resu);
+            //
+            //             let data = resu.data.MenuItems.map((name, index) => {
+            //                 console.log(name);
+            //                 // <p>{name.name}</p>
+            //                 return (
+            //                     <div className="customer-db-third-customerorders-detail-cont-2">
+            //                         <div className="customer-db-third-customerorders-detail">
+            //                             <img className="customer-db-menu-img" src={name.img}></img>
+            //                         </div>
+            //                         <div className="customer-db-third-customerorders-detail">
+            //                             {name.name}
+            //                         </div>
+            //                         <div className="customer-db-third-customerorders-detail">
+            //                             {name.price}
+            //                         </div>
+            //                         <div className="customer-db-third-customerorders-detail">
+            //                             {name.OrderDetail.quantity}
+            //                         </div>
+            //                     </div>
+            //                 );
+            //             });
+            //             // setList(data);
+            //         });
+            // }
+        axios.get(`http://localhost:3001/dashboard/menuitem`,{
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
         }).then(resu=>{
 
@@ -104,24 +139,25 @@ const Menu = () => {
                 let data = resu.data.map((name,index)=>{
                     console.log(name)
                     return(
-                    <option value={name.name} key={index}>{name.name}</option>
+                    <option value={name.id} key={index}>{name.name}</option>
                     )
                 })
             console.log(data)
             setMenuitem(data)
         })
-    },[]);
+        getData()
+    },[select]);
 
         return(
             <div className={"grid28"}>
                 <div>
                     <h1>Menu Ingredient View</h1>
-                    <form onSubmit>
-                    <select name="<menu>" id="menu">
+                    <select name="<menu>" id="menu" onChange={handleChangeSelect}>
+                        <option value="" selected disabled hidden>
+                            Choose Menu
+                        </option>
                         {menuItem}
                     </select>
-                        <input type={"submit"} name={"Submit"}/>
-                    </form>
                 </div>
                 <DecompositionTreeGraph {...config}/>;
             </div>
