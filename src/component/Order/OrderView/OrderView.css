@@ -37,10 +37,16 @@ body {
 }
 .order-slide-horizon {
   overflow: auto;
+  width: 75vw;
   padding: 2.5rem;
   justify-content: flex-start;
   display: flex;
   flex-wrap: wrap;
+}
+@media (max-width: 580px) {
+  .order-slide-horizon {
+    justify-content: center;
+  }
 }
 .order-view-item-cont {
   background-color: #fefefe;
@@ -86,9 +92,55 @@ body {
 
 .searchBar {
   width: 800px;
+  /* height: 60px; */
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+@media (min-width: 500px) {
+  .searchBar {
+    width: 200px;
+  }
+}
+
+@media (min-width: 610px) {
+  .searchBar {
+    width: 300px;
+  }
+}
+
+@media (min-width: 710px) {
+  .searchBar {
+    width: 400px;
+  }
+}
+
+@media (min-width: 830px) {
+  .searchBar {
+    width: 500px;
+  }
+}
+
+@media (min-width: 950px) {
+  .searchBar {
+    width: 600px;
+  }
+}
+
+@media (min-width: 1070px) {
+  .searchBar {
+    width: 800px;
+  }
+}
+
+@media (max-width: 500px) {
+  .searchBar {
+    width: 200px;
+  }
+  #view-header-menulabel {
+    font-size: 20px;
+  }
 }
 
 #searchQueryInput {
@@ -101,6 +153,13 @@ body {
   border-radius: 1.625rem;
   padding: 0 3.5rem 0 1.5rem;
   font-size: 1rem;
+}
+
+@media (max-width: 500px) {
+  #searchQueryInput {
+    height: 1.8rem;
+    font-size: 0.75rem;
+  }
 }
 #searchQueryInput::placeholder {
   color: white;
@@ -125,7 +184,7 @@ body {
 
 .order-view-category-btn {
   height: 90%;
-  width: 10%;
+  width: 100px;
   outline: none;
   border: none;
   background-color: #fefefe;
@@ -165,6 +224,7 @@ body {
 .order-view-category-cont {
   /* border: 1px blue solid; */
   /* box-shadow: 0px -2px 4px #ccc; */
+  width: 75vw;
   display: flex;
   justify-content: center;
   align-items: center;

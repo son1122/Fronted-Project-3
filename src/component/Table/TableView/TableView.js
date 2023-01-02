@@ -23,12 +23,11 @@ const TableView = ({
     axios
       .get(`http://localhost:3001/orderdetail/${selTableNumber}`)
       .then((res) => {
-        console.log("Get table Order Id from Selected Number >>>>>", res.data);
         setTableOrderDetail(res.data.menuItems);
       })
       .catch((err) => {
         setTableOrderDetail([]);
-        console.log("err", err);
+        //This will response in Developer Mode > Network > Response, showing that there is no order for the selected table. [GET 404 (Not Found)], is expected to be shown in console)
       });
   };
 
@@ -65,6 +64,7 @@ const TableView = ({
         <p id="view-header-menulabel">Table View </p>
       </div>
       <div className="table-slide-horizon">{allTables}</div>
+      <div></div>
     </div>
   );
 };

@@ -6,6 +6,7 @@
 }
 
 .table-slide-horizon {
+  height: 73vh;
   overflow: scroll;
   padding: 2.5rem;
   justify-content: flex-start;

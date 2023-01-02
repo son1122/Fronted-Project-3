@@ -25,7 +25,6 @@ const OrderSide = ({
 
       // .get(`http://localhost:3001/table`)
       .then((res) => {
-        console.log("ALL TABLE DATA FROM BACKEND >>> ", res.data);
         setAllTable(res.data);
       })
       .catch((err) => {
@@ -104,8 +103,6 @@ const OrderSide = ({
     );
   };
   let confirmOrder = () => {
-    console.log("Menu Items >>> ", selectMenuItems);
-    console.log("Select Table >>> ", selectTable);
     const checkTable = () => {
       if (selectTable === null) {
         // alert("PLEASE SELECT TABLE");
@@ -125,10 +122,8 @@ const OrderSide = ({
           .catch((err) => {
             console.log(err);
           });
-        // alert("Created Order successfully.");
         notiSuccess();
         setSelectMenuItems([]);
-        // messageApi.info("Created Order Successfully");
       }
     };
     checkTable();
@@ -138,16 +133,15 @@ const OrderSide = ({
       <h2>Order#00{currentOrder}</h2>
       <div className={"order-side-detail-grid"}>
         <div className={"table-selection"}>
-          {/* <label htmlFor="order-side-table-list">Select Table</label> */}
           <div className="custom-select">
             <select
               className="order-side-table-list"
               form="order-side-form"
-              defaultValue={"placeholder"}
+              defaultValue={"defaultselect"}
               placeholder="Select Table"
               onChange={(e) => setSelectTable(e.target.value)}
             >
-              <option selected disabled value={null}>
+              <option disabled value={"defaultselect"}>
                 Select Table
               </option>
               {tableList}
@@ -187,10 +181,6 @@ const OrderSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
-        {/* <div className="order-side-confirm-btn" onClick={confirmOrder}>
-          Confirm
-        </div>
-         */}
         <div
           className="order-side-confirm-btn"
           onClick={() => {
