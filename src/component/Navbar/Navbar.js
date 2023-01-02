@@ -4,6 +4,7 @@ const Navbar = () => {
   return (
     <div className={"navbar-grid"}>
       <p></p>
+      <p></p>
       <div className="navbar-item-cont">
         <a href={"/order"}>
           <img src="https://imgur.com/x2OyM62.png"></img>
@@ -22,13 +23,7 @@ const Navbar = () => {
           <p>Dashboard</p>
         </a>
       </div>
-      <div className="navbar-item-cont">
-        <a href={"/order"}>
-          <img src="https://imgur.com/MuX5wVb.png"></img>
-          <p>Profile</p>
-        </a>
-      </div>
-
+      <p></p>
       <p></p>
     </div>
   );
