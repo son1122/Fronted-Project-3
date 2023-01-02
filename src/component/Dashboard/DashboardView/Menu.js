@@ -42,7 +42,7 @@ const Menu = () => {
     const [config,setConfig] = useState({
         data,
         autoFit: true,
-        behaviors: ['drag-canvas', 'zoom-canvas', 'drag-node'],
+        // behaviors: ['drag-canvas', 'zoom-canvas', 'drag-node'],
         nodeCfg:{
             autoWidth:true,
         }
@@ -112,7 +112,6 @@ const Menu = () => {
         })
     },[]);
 
-    <option value="audi">Audi</option>
         return(
             <div className={"grid28"}>
                 <div>
