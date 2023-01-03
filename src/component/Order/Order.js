@@ -21,12 +21,10 @@ const Order = () => {
   const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`,{
-          headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {
-        console.log("Response Data from Order.js >> ", res.data);
-
         setMenuItems(res.data);
       })
       .catch((err) => {
@@ -35,11 +33,10 @@ const Order = () => {
   }, [menuItemsCategory]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/order`,{
-          headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+      .get(`http://localhost:3001/order`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {
-        console.log("Order response in Orderview >>>> ", res.data);
         const data = res.data;
         const handleCurrentOrder = () => {
           // this function will get the latest order in the database and add 1 to make it seem like this is the new order we are creating.

@@ -17,7 +17,6 @@ const OrderView = ({
   const handleCategoryChange = (event, category) => {
     event.preventDefault();
     setMenuItemsCategory(category);
-    // console.log(`Selected category: ${category.target.value}`);
   };
   const handleSearchChange = (query) => {
     query.preventDefault();
@@ -86,14 +85,14 @@ const OrderView = ({
         <p id="view-header-menulabel">Menu Category </p>
       </div>
       <div className="order-view-search-cont">
-        <p className="view-header">Order#00{currentOrder}</p>
+        {/* <p className="view-header">Order#00{currentOrder}</p> */}
         <form className="order-view-search-form">
           <div className="searchBar">
             <input
               id="searchQueryInput"
               type="text"
               name="searchQueryInput"
-              placeholder="Search"
+              placeholder={`Order#00${currentOrder}`}
               value={itemsSearchQuery}
               onChange={handleSearchChange}
             />

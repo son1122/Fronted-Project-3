@@ -1,0 +1,14 @@
+.not-found-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-text {
+  height: 300px;
+  width: 500px;
+  color: #ff2531;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
