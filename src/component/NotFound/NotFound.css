@@ -12,3 +12,14 @@
   justify-content: center;
   align-items: center;
 }
+
+.not-found-backlogin {
+  text-decoration: none;
+  color: #ff2531;
+  cursor: pointer;
+}
+
+.not-found-backlogin:hover {
+  opacity: 80%;
+  transition: 0.75s;
+}
