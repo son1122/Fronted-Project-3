@@ -22,7 +22,7 @@ const OrderSide = ({
   const lottieRef = useRef(null);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/table`, {
+      .get(`https://backend-sei-project-3.cyclic.app/table`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
 
@@ -133,7 +133,7 @@ const OrderSide = ({
         } else {
           axios
             .post(
-              "http://localhost:3001/order",
+              "https://backend-sei-project-3.cyclic.app/order",
               {
                 menuItems: selectMenuItems,
                 table_number: selectTable,

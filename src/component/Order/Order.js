@@ -21,7 +21,7 @@ const Order = () => {
   const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/menu_items/category/${menuItemsCategory}`, {
+      .get(`https://backend-sei-project-3.cyclic.app/menu_items/category/${menuItemsCategory}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {
@@ -31,7 +31,7 @@ const Order = () => {
   }, [menuItemsCategory]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/order`, {
+      .get(`https://backend-sei-project-3.cyclic.app/order`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {

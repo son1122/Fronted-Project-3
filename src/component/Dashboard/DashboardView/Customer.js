@@ -5,7 +5,7 @@ import axios from "axios";
 const Customer = () => {
     const [data,setData] = useState()
     useEffect(()=>{
-        axios.get(`http://localhost:3001/dashboard/customer`,{
+        axios.get(`https://backend-sei-project-3.cyclic.app/dashboard/customer`,{
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
         }).then(resu=>{
 

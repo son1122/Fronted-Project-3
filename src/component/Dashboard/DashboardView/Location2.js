@@ -60,7 +60,7 @@ export default function Location(){
         </GoogleMapReact>
     </div>)
     useEffect(()=>{
-        axios.get("http://localhost:3001/dashboard/location/seller", {
+        axios.get("https://backend-sei-project-3.cyclic.app/dashboard/location/seller", {
                 headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
             })
             .then((resSeller) => {
@@ -80,7 +80,7 @@ export default function Location(){
             }).catch(e=>{
 
         })
-        axios.get("http://localhost:3001/dashboard/location/customer", {
+        axios.get("https://backend-sei-project-3.cyclic.app/dashboard/location/customer", {
                 headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
             })
             .then((resCustomer) => {

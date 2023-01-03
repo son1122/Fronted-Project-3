@@ -40,7 +40,7 @@ const Signup = () => {
   function validateForm() {
     if (validateEmail() && validatePassword()) {
       axios
-        .post(`http://localhost:3001/auth/signup`, {
+        .post(`https://backend-sei-project-3.cyclic.app/auth/signup`, {
           username: username,
           password: password,
           email: email,

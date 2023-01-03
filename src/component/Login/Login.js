@@ -16,7 +16,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/auth/login", formData,{
+      .post("https://backend-sei-project-3.cyclic.app/auth/login", formData,{
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {

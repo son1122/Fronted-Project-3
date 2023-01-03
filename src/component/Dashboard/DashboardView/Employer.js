@@ -7,7 +7,7 @@ const Employer = () => {
     const [dataChef,setDataChef] = useState()
     const [dataWaiter,setDataWaiter] = useState()
     useEffect(()=>{
-        axios.get(`http://localhost:3001/dashboard/chef`,{
+        axios.get(`https://backend-sei-project-3.cyclic.app/dashboard/chef`,{
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
         }).then(resu=>{
 
@@ -25,7 +25,7 @@ const Employer = () => {
             })
             setDataChef(dataRes)
         })
-        axios.get(`http://localhost:3001/dashboard/waiter`,{
+        axios.get(`https://backend-sei-project-3.cyclic.app/dashboard/waiter`,{
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
         }).then(resu=>{
 
