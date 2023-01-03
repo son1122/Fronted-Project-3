@@ -3,6 +3,8 @@
   grid-template-rows: 10vh auto;
   background-color: #fff;
   overflow: auto;
+  z-index: 3;
+  /* width: 100%; */
 }
 .order-side-detail-grid {
   display: grid;
@@ -13,7 +15,6 @@
   grid-template-columns: 30% 40% 30%;
   background: #fff;
   grid-gap: 2px;
-  /* margin-top: 0.5rem; */
   border-radius: 0.25rem;
   margin: 0.5rem 0.5rem;
   -moz-box-shadow: 0 0 3px #ccc;
@@ -69,12 +70,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  /* border: red 1px solid; */
   border-top: rgb(199, 199, 199) 2px dashed;
   margin: 0 1rem;
   margin-top: 0.5rem;
-  /* border-style: dashed; */
-  /* background-color: #ff2351; */
   overflow: hidden;
 }
 
@@ -126,8 +124,6 @@
   flex-direction: column;
   width: 50%;
   position: relative;
-  /* max-height: 30%; */
-  /* justify-content: space-around; */
   text-align: left;
   justify-content: center;
 }
@@ -148,8 +144,6 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  /* position: relative; */
-  /* align-items: flex-end; */
   text-align: right;
   justify-content: center;
 }
