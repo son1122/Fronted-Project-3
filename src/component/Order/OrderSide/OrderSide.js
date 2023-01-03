@@ -115,6 +115,8 @@ const OrderSide = ({
             customer_id: null,
             order_date: new Date(),
             status: "inprogress",
+          },{
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
           })
           .then((res) => {
             console.log(res.data);

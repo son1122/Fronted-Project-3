@@ -18,7 +18,7 @@ const Table = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:3001/table`, {
-        // headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
+        headers: {Authorization: `Bearer ${localStorage.getItem("jwt")}`}
       })
       .then((res) => {
         setTables(res.data);
