@@ -8,3 +8,8 @@
   overflow: auto;
   white-space: nowrap;
 }
+
+.grid28{
+  display: grid;
+  grid-template-rows: 20% 80%;
+   }

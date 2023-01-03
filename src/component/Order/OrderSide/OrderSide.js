@@ -125,13 +125,21 @@ const OrderSide = ({
           notiFailed();
         } else {
           axios
-            .post("http://localhost:3001/order", {
-              menuItems: selectMenuItems,
-              table_number: selectTable,
-              customer_id: null,
-              order_date: new Date(),
-              status: "inprogress",
-            })
+            .post(
+              "http://localhost:3001/order",
+              {
+                menuItems: selectMenuItems,
+                table_number: selectTable,
+                customer_id: null,
+                order_date: new Date(),
+                status: "inprogress",
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                },
+              }
+            )
             .then((res) => {})
             .catch((err) => {});
           notiSuccess();

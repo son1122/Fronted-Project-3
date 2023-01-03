@@ -33,7 +33,9 @@ const TableView = ({
 
   const getOrderWithNameAndPrice = (selTableNumber) => {
     axios
-      .get(`http://localhost:3001/orderdetail/${selTableNumber}`)
+      .get(`http://localhost:3001/orderdetail/${selTableNumber}`,{
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      })
       .then((res) => {
         setTableOrderDetail(res.data.menuItems);
       })
