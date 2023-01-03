@@ -16,7 +16,9 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/auth/login", formData)
+      .post("http://localhost:3001/auth/login", formData,{
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      })
       .then((res) => {
         let token = res.data;
         localStorage.setItem("jwt", token);

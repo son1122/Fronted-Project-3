@@ -29,6 +29,7 @@ export default function Location(){
                     lng={30.337844}
                     text="My Marker"
                 />
+                
             </GoogleMapReact>
         </div>
     );
