@@ -23,6 +23,7 @@ const NotFound = () => {
     <div className="not-found-cont">
       {noPermission}
       <ToastContainer />
+      <a href={"/login"}>GO TO Login Page</a>
     </div>
   );
 };

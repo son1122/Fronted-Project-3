@@ -3,3 +3,7 @@
     grid-template-columns: 80vw auto;
     height:100%
 }
+.dashboard-grid-half{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}

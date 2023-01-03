@@ -45,6 +45,8 @@ const Signup = () => {
           password: password,
           email: email,
           phone: phone,
+        },{
+          headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
         })
         .then(function (response) {
           if (response.data.status == "signUp") {
