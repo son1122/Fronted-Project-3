@@ -37,7 +37,7 @@ const Location = () => {
     return (
         <div style={{ height: "100vh", width: "100%" }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+                bootstrapURLKeys={{ key: "AIzaSyDWvNicZvHNKI4ZLMvb7t1URumeoexMrGU" }}
                 defaultCenter={{ lat: 52.6376, lng: -1.135171 }}
                 defaultZoom={10}
                 yesIWantToUseGoogleMapApiInternals
@@ -106,3 +106,4 @@ const Location = () => {
     );
 }
 export default Location
+
