@@ -137,7 +137,7 @@ const OrderSide = ({
               {
                 menuItems: selectMenuItems,
                 table_number: selectTable,
-                customer_id: null,
+                customer_id: 3,
                 order_date: new Date(),
                 status: "inprogress",
               },
