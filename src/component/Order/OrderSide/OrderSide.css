@@ -1,20 +1,155 @@
 .order-side-grid {
   display: grid;
-  grid-template-rows: 10vh 70vh 10vh;
+  grid-template-rows: 10vh auto;
+  background-color: #fff;
+  overflow: auto;
+  z-index: 3;
+  /* width: 100%; */
 }
 .order-side-detail-grid {
   display: grid;
-  grid-template-rows: 5vh 55vh 10vh;
+  grid-template-rows: 5vh 8vh 48vh 10vh;
 }
 .order-side-menu-grid {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 30% 40% 30%;
   background: #fff;
   grid-gap: 2px;
-  min-height: 0;  /* NEW */
-  min-width: 0
+  border-radius: 0.25rem;
+  margin: 0.5rem 0.5rem;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+  min-height: 80px; /* NEW */
+  min-width: 0;
+  align-items: center;
 }
-.order-side-slide{
-  /*grid-auto-flow: dense;*/
-  /*overflow-y: scroll;*/
+.order-side-slide {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.order-side-confirm-btn {
+  background-color: #ff2531;
+  color: #fff;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+}
+
+.order-side-confirm-btn-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-side-confirm-btn:hover {
+  opacity: 80%;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.order-side-table-list {
+  text-align: center;
+  height: 50px;
+  width: 300px;
+  border: none;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+}
+
+.total-price-label {
+  color: #212121;
+  font-size: 25px;
+}
+.price-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-top: rgb(199, 199, 199) 2px dashed;
+  margin: 0 1rem;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.order-side-menu-img {
+  height: 80px;
+  margin: 0.25rem 0;
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+}
+
+.order-side-menu-nameprice {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: 0.5rem;
+  justify-content: center;
+}
+
+.order-side-menu-price {
+  text-align: left;
+  color: rgb(155, 155, 155);
+}
+
+.order-side-menu-name {
+  text-align: left;
+}
+.order-side-menu-qtybtn {
+  display: flex;
+  justify-content: center;
+}
+
+#decrement {
+  margin-left: 0.5rem;
+  border-radius: 100%;
+  border: none;
+  background-color: #ff2351;
+  color: white;
+}
+
+#decrement:hover {
+  opacity: 80%;
+}
+
+.total-price-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  position: relative;
+  text-align: left;
+  justify-content: center;
+}
+.total-price-label-total {
+  margin: 0;
+}
+
+#service {
+  color: rgb(155, 155, 155);
+  font-size: 12px;
+}
+#tax {
+  color: rgb(155, 155, 155);
+  font-size: 12px;
+}
+
+.total-price-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  text-align: right;
+  justify-content: center;
+}
+
+.order-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
