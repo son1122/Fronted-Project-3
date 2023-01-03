@@ -168,14 +168,23 @@ const Menu = () => {
     <div className={"grid28"}>
       <div>
         <h1>Menu Ingredient View</h1>
-        <select name="<menu>" id="menu" onChange={handleChangeSelect}>
+        <select
+          name="<menu>"
+          id="menu"
+          className="order-side-table-list"
+          onChange={handleChangeSelect}
+        >
           <option value="" selected disabled hidden>
             Choose Menu
           </option>
           {menuItem}
         </select>
       </div>
-      <DecompositionTreeGraph {...config} />;
+      <DecompositionTreeGraph
+        style={{ backgroundColor: "#fafafa" }}
+        {...config}
+      />
+      ;
     </div>
   );
 };
