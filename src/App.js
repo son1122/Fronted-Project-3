@@ -10,7 +10,6 @@ import NotFound from "./component/NotFound/NotFound";
 function App() {
   const navigate = useNavigate();
   const [login, setLogin] = useState(false);
-
   useEffect(() => {
     axios
       .get("http://localhost:3001/auth/verify", {

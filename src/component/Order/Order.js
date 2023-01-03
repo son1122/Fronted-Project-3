@@ -27,9 +27,7 @@ const Order = () => {
       .then((res) => {
         setMenuItems(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, [menuItemsCategory]);
   useEffect(() => {
     axios
@@ -45,9 +43,7 @@ const Order = () => {
 
         handleCurrentOrder();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   return (
