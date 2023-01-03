@@ -44,15 +44,38 @@ const Menu = () => {
         data,
         autoFit: true,
         // behaviors: ['drag-canvas', 'zoom-canvas', 'drag-node'],
-        nodeCfg:{
-            autoWidth:true,
+        nodeCfg: {
+            title: {
+                containerStyle: {
+                    fill: 'black',
+                },
+                style: {
+                    fill: '#000',
+                    fontSize: 12,
+                },
+            },
+            style: {
+                fill: '#E6EAF1',
+                stroke: '#B2BED5',
+                radius: [2, 2, 2, 2],
+            },
+            autoWidth: true,
+            items: {
+                padding: 6,
+                fill: "green",
+                containerStyle: {
+                    fill: 'red',
+                },
+
+            },
         }
-    })
+}
+    )
     const handleChangeSelect = (e) => {
         setSelect(e.target.value);
     };
     const getData =()=>{
-    axios.get(`http://localhost:3001/dashboard/menu/${select}`,{
+    axios.get(`https://backend-sei-project-3.cyclic.app/dashboard/menu/${select}`,{
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
     }).then(res=>{
         console.log(res.data)
@@ -102,7 +125,7 @@ const Menu = () => {
     useEffect(() => {
             // if (select !== undefined) {
             //     axios
-            //         .get(`http://localhost:3001/customer/data/${select}`, {
+            //         .get(`https://backend-sei-project-3.cyclic.app/customer/data/${select}`, {
             //             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
             //         })
             //         .then((resu) => {
@@ -131,7 +154,7 @@ const Menu = () => {
             //             // setList(data);
             //         });
             // }
-        axios.get(`http://localhost:3001/dashboard/menuitem`,{
+        axios.get(`https://backend-sei-project-3.cyclic.app/dashboard/menuitem`,{
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
         }).then(resu=>{
 

@@ -27,7 +27,7 @@ const TableSide = ({
   // Get Menu from data base
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/menu_items`, {
+      .get(`https://backend-sei-project-3.cyclic.app/menu_items`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {
@@ -129,7 +129,7 @@ const TableSide = ({
     }
     axios
       .put(
-        `http://localhost:3001/order/status/${selTable}`,
+        `https://backend-sei-project-3.cyclic.app/order/status/${selTable}`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },

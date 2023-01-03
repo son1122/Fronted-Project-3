@@ -12,7 +12,7 @@ function App() {
   const [login, setLogin] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/auth/verify", {
+      .get("https://backend-sei-project-3.cyclic.app/auth/verify", {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {
