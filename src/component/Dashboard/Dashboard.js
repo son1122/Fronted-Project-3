@@ -9,7 +9,7 @@ import Customer from "./DashboardView/Customer";
 import Employer from "./DashboardView/Employer";
 import Ingredient from "./DashboardView/Ingredient";
 import Seller from "./DashboardView/Seller";
-import Location from "./DashboardView/Location"
+import Location from "./DashboardView/Location2"
 
 const Dashboard = () => {
     const [select,setSelect]=useState(0)

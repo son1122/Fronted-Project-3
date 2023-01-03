@@ -1,109 +1,228 @@
-import React, { useState, useRef } from "react";
-import useSwr from "swr";
-import GoogleMapReact from "google-map-react";
-import useSupercluster from "use-supercluster";
-const fetcher = (...args) => fetch(...args).then(response => response.json());
+/*
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// [START maps_react_map]
 
-const Marker = ({ children }) => children;
+import * as React from "react";
+import { createRoot } from "react-dom/client";
+import { Wrapper } from "@googlemaps/react-wrapper";
+import { createCustomEqual } from "fast-equals";
+import { isLatLngLiteral } from "@googlemaps/typescript-guards";
+import Summary from "./Summary";
+const render = (status) => {
+    return <h1>{status}</h1>;
+};
 
 const Location = () => {
-    const mapRef = useRef();
-    const [bounds, setBounds] = useState(null);
-    const [zoom, setZoom] = useState(10);
-
-    const url =
-        "https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592&date=2019-10";
-    const { data, error } = useSwr(url, { fetcher });
-    const crimes = data && !error ? data.slice(0, 2000) : [];
-    const points = crimes.map(crime => ({
-        type: "Feature",
-        properties: { cluster: false, crimeId: crime.id, category: crime.category },
-        geometry: {
-            type: "Point",
-            coordinates: [
-                parseFloat(crime.location.longitude),
-                parseFloat(crime.location.latitude)
-            ]
-        }
-    }));
-
-    const { clusters, supercluster } = useSupercluster({
-        points,
-        bounds,
-        zoom,
-        options: { radius: 75, maxZoom: 20 }
+    const google = window.google
+    // [START maps_react_map_component_app_state]
+    const [clicks, setClicks] = React.useState([]);
+    const [zoom, setZoom] = React.useState(3); // initial zoom
+    const [center, setCenter] = React.useState({
+        lat: 0,
+        lng: 0,
     });
 
-    return (
-        <div style={{ height: "100vh", width: "100%" }}>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyDWvNicZvHNKI4ZLMvb7t1URumeoexMrGU" }}
-                defaultCenter={{ lat: 52.6376, lng: -1.135171 }}
-                defaultZoom={10}
-                yesIWantToUseGoogleMapApiInternals
-                onGoogleApiLoaded={({ map }) => {
-                    mapRef.current = map;
-                }}
-                onChange={({ zoom, bounds }) => {
-                    setZoom(zoom);
-                    setBounds([
-                        bounds.nw.lng,
-                        bounds.se.lat,
-                        bounds.se.lng,
-                        bounds.nw.lat
-                    ]);
-                }}
-            >
-                {clusters.map(cluster => {
-                    const [longitude, latitude] = cluster.geometry.coordinates;
-                    const {
-                        cluster: isCluster,
-                        point_count: pointCount
-                    } = cluster.properties;
+    const onClick = (e) => {
+        // avoid directly mutating state
+        console.log(clicks)
+        setClicks([...clicks, e.latLng]);
+    };
 
-                    if (isCluster) {
-                        return (
-                            <Marker
-                                key={`cluster-${cluster.id}`}
-                                lat={latitude}
-                                lng={longitude}
-                            >
-                                <div
-                                    className="cluster-marker"
-                                    style={{
-                                        width: `${10 + (pointCount / points.length) * 20}px`,
-                                        height: `${10 + (pointCount / points.length) * 20}px`
-                                    }}
-                                    onClick={() => {
-                                        const expansionZoom = Math.min(
-                                            supercluster.getClusterExpansionZoom(cluster.id),
-                                            20
-                                        );
-                                        mapRef.current.setZoom(expansionZoom);
-                                        mapRef.current.panTo({ lat: latitude, lng: longitude });
-                                    }}
-                                >
-                                    {pointCount}
-                                </div>
-                            </Marker>
-                        );
-                    }
+    const onIdle = (m) => {
+        console.log("onIdle");
+        console.log(clicks)
+        setZoom(m.getZoom());
+        setCenter(m.getCenter().toJSON());
+    };
 
-                    return (
-                        <Marker
-                            key={`crime-${cluster.properties.crimeId}`}
-                            lat={latitude}
-                            lng={longitude}
-                        >
-                            <button className="crime-marker">
-                                <img src="/custody.svg" alt="crime doesn't pay" />
-                            </button>
-                        </Marker>
-                    );
-                })}
-            </GoogleMapReact>
+    // [END maps_react_map_component_app_state]
+    const form = (
+        <div
+            style={{
+                padding: "1rem",
+                flexBasis: "250px",
+                height: "100%",
+                overflow: "auto",
+            }}
+        >
+            <label htmlFor="zoom">Zoom</label>
+            <input
+                type="number"
+                id="zoom"
+                name="zoom"
+                value={zoom}
+                onChange={(event) => setZoom(Number(event.target.value))}
+            />
+            <br />
+            <label htmlFor="lat">Latitude</label>
+            <input
+                type="number"
+                id="lat"
+                name="lat"
+                value={center.lat}
+                onChange={(event) =>
+                    setCenter({ ...center, lat: Number(event.target.value) })
+                }
+            />
+            <br />
+            <label htmlFor="lng">Longitude</label>
+            <input
+                type="number"
+                id="lng"
+                name="lng"
+                value={center.lng}
+                onChange={(event) =>
+                    setCenter({ ...center, lng: Number(event.target.value) })
+                }
+            />
+            <h3>{clicks.length === 0 ? "Click on map to add markers" : "Clicks"}</h3>
+            {clicks.map((latLng, i) => (
+                <pre key={i}>{JSON.stringify(latLng.toJSON(), null, 2)}</pre>
+            ))}
+            <button onClick={() => setClicks([])}>Clear</button>
         </div>
     );
-}
-export default Location
+    // [START maps_react_map_component_app_return]
+    return (
+        <div style={{ display: "flex", height: "100%" }}>
+            <Wrapper apiKey={"AIzaSyDWvNicZvHNKI4ZLMvb7t1URumeoexMrGU"} render={render}>
+                <Map
+                    center={center}
+                    onClick={onClick}
+                    onIdle={onIdle}
+                    zoom={zoom}
+                    style={{ flexGrow: "1", height: "100%" }}
+                >
+                    {clicks.map((latLng, i) => (
+                        <Marker key={i} position={latLng} />
+                    ))}
+                </Map>
+            </Wrapper>
+            {/* Basic form for controlling center and zoom of map. */}
+            {form}
+        </div>
+    );
+    // [END maps_react_map_component_app_return]
+};
+export default Location;
+const Map = ({ onClick, onIdle, children, style, ...options }) => {
+    // [START maps_react_map_component_add_map_hooks]
+    const ref = React.useRef(null);
+    const [map, setMap] = React.useState();
 
+    React.useEffect(() => {
+        if (ref.current && !map) {
+            setMap(new window.google.maps.Map(ref.current, {}));
+        }
+    }, [ref, map]);
+    // [END maps_react_map_component_add_map_hooks]
+    // [START maps_react_map_component_options_hook]
+    // because React does not do deep comparisons, a custom hook is used
+    // see discussion in https://github.com/googlemaps/js-samples/issues/946
+    useDeepCompareEffectForMaps(() => {
+        if (map) {
+            map.setOptions(options);
+        }
+    }, [map, options]);
+    // [END maps_react_map_component_options_hook]
+    // [START maps_react_map_component_event_hooks]
+    React.useEffect(() => {
+        const google = window.google
+        if (map) {
+            ["click", "idle"].forEach((eventName) =>
+                google.maps.event.clearListeners(map, eventName)
+            );
+            if (onClick) {
+                map.addListener("click", onClick);
+            }
+
+            if (onIdle) {
+                map.addListener("idle", () => onIdle(map));
+            }
+        }
+    }, [map, onClick, onIdle]);
+    // [END maps_react_map_component_event_hooks]
+    // [START maps_react_map_component_return]
+    return (
+        <>
+            <div ref={ref} style={style} />
+            {React.Children.map(children, (child) => {
+                if (React.isValidElement(child)) {
+                    // set the map prop on the child component
+                    // @ts-ignore
+                    return React.cloneElement(child, { map });
+                }
+            })}
+        </>
+    );
+    // [END maps_react_map_component_return]
+};
+
+// [START maps_react_map_marker_component]
+const Marker = (options) => {
+    const [marker, setMarker] = React.useState();
+
+    React.useEffect(() => {
+        if (!marker) {
+            const google = window.google
+            setMarker(new google.maps.Marker());
+        }
+
+        // remove marker from map on unmount
+        return () => {
+            if (marker) {
+                marker.setMap(null);
+            }
+        };
+    }, [marker]);
+    React.useEffect(() => {
+        if (marker) {
+            marker.setOptions(options);
+        }
+    }, [marker, options]);
+    return null;
+};
+
+// [END maps_react_map_marker_component]
+const deepCompareEqualsForMaps = createCustomEqual((deepEqual) => (a, b) => {
+    const google = window.google
+    if (
+        isLatLngLiteral(a) ||
+        a instanceof google.maps.LatLng ||
+        isLatLngLiteral(b) ||
+        b instanceof google.maps.LatLng
+    ) {
+        return new google.maps.LatLng(a).equals(new google.maps.LatLng(b));
+    }
+    // TODO extend to other types
+    // use fast-equals for other objects
+    return deepEqual(a, b);
+});
+
+function useDeepCompareMemoize(value) {
+    const ref = React.useRef();
+
+    if (!deepCompareEqualsForMaps(value, ref.current)) {
+        ref.current = value;
+    }
+    return ref.current;
+}
+
+function useDeepCompareEffectForMaps(callback, dependencies) {
+    React.useEffect(callback, dependencies.map(useDeepCompareMemoize));
+}
+
+// [END maps_react_map]
