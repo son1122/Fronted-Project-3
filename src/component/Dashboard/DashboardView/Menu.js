@@ -50,10 +50,10 @@ const Menu = () => {
     nodeCfg: {
       title: {
         containerStyle: {
-          fill: "black",
+          fill: "#ff2531",
         },
         style: {
-          fill: "#000",
+          fill: "#fff",
           fontSize: 12,
         },
       },
@@ -62,12 +62,19 @@ const Menu = () => {
         stroke: "#B2BED5",
         radius: [2, 2, 2, 2],
       },
+
+      nodeStateStyles: {
+        hover: {
+          stroke: "#252525",
+          lineWidth: 3,
+        },
+      },
       autoWidth: true,
       items: {
         padding: 6,
         fill: "green",
         containerStyle: {
-          fill: "red",
+          fill: "#fff",
         },
       },
     },
@@ -127,20 +134,34 @@ const Menu = () => {
         setConfig({
           data,
           autoFit: true,
+
           nodeCfg: {
             title: {
               containerStyle: {
                 fill: "#ff2531",
               },
               style: {
-                fill: "#000",
+                fill: "#fff",
                 fontSize: 12,
               },
+            },
+            style: {
+              fill: "#E6EAF1",
+              stroke: "#B2BED5",
+              radius: [2, 2, 2, 2],
             },
             nodeStateStyles: {
               hover: {
                 stroke: "#000",
                 lineWidth: 3,
+              },
+            },
+            autoWidth: true,
+            items: {
+              padding: 6,
+              fill: "green",
+              containerStyle: {
+                fill: "#fff",
               },
             },
           },
@@ -175,7 +196,12 @@ const Menu = () => {
     <div className={"grid28"}>
       <div>
         <h1>Menu Ingredient View</h1>
-        <select name="<menu>" id="menu" onChange={handleChangeSelect}>
+        <select
+          name="<menu>"
+          id="menu"
+          className={"order-side-table-list"}
+          onChange={handleChangeSelect}
+        >
           <option value="" selected disabled hidden>
             Choose Menu
           </option>

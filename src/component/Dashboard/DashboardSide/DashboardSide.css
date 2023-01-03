@@ -1,4 +1,20 @@
-.dashboard-side-grid{
-    display: grid;
-    grid-template-rows: auto auto;
+.dashboard-side-grid {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.dashboard-side-items {
+  cursor: pointer;
+  /* border: red solid 1px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+}
+
+.dashboard-side-items:hover {
+  background-color: #ff2531;
+  transition: 0.7s;
 }

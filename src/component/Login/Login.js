@@ -16,7 +16,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://backend-sei-project-3.cyclic.app/auth/login", formData,{
+      .post("https://backend-sei-project-3.cyclic.app/auth/login", formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((res) => {
@@ -53,7 +53,7 @@ const Login = (props) => {
             Password :{" "}
             <input
               className="detail-input"
-              type={"text"}
+              type={"password"}
               name={"password"}
               placeholder={" Password"}
               onChange={handleChange}
