@@ -90,11 +90,8 @@ const CancelButton = styled.button`
 
 export default function ModalConfirm({
   open,
-  children,
-  onClose,
   lottieRef,
   currentOrder,
-  isModal,
   setIsModal,
   confirmOrder,
   isFailed,
@@ -102,13 +99,10 @@ export default function ModalConfirm({
   selectTable,
 }) {
   const [isSuccess, setIsSuccess] = useState(false);
-  // const [isFailed, setIsFailed] = useState(false);
   const [statusText, setStatusText] = useState("Confirm Order?");
 
+  //See ModalCheckout.js, the concepts are pretty the same only some of the conditional are different
   useEffect(() => {
-    // setIsSuccess(false);
-    console.log("check if issuccess", isSuccess);
-    console.log("check if isfailed", isFailed);
     if (isSuccess) {
       if (selectTable === null) {
         lottie.loadAnimation({

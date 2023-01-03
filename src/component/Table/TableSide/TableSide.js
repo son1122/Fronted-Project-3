@@ -94,7 +94,7 @@ const TableSide = ({
     }
   }, [selTable]);
 
-  //Map menu API
+  //Sum up the totalPrice of the menu item of a table
   const totalPrice = tableOrderDetailState.reduce((sum, item) => {
     return sum + item.price * item.quantity;
   }, 0);
@@ -120,6 +120,8 @@ const TableSide = ({
     );
   });
 
+  //When checkout is confirm it check if the length of the array item is more than 0 if yes then return checkout sucess, then perform the put method.
+  //The condition here is for rendering the toasts
   const handleCheckout = () => {
     if (tableOrderDetailState.length > 0) {
       checkoutSuccess();
@@ -186,9 +188,6 @@ const TableSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
-        {/* <div className="order-side-confirm-btn" onClick={handleCheckout}>
-          Checkout
-        </div> */}
         <ModalCheckout
           lottieRef={lottieRef}
           open={isModal}
@@ -200,9 +199,7 @@ const TableSide = ({
           setIsFailed={setIsFailed}
           handleCheckout={handleCheckout}
           tableOrderDetailState={tableOrderDetailState}
-        >
-          {/* open={isModal} */}
-        </ModalCheckout>
+        ></ModalCheckout>
         <div
           className="order-side-confirm-btn"
           onClick={() => {

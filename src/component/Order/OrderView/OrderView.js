@@ -32,6 +32,7 @@ const OrderView = ({
     setItemsSearchQuery(query.target.value);
   };
 
+  //This function handle the search by passing the search?q= parameter to backend which then in backend we will use the value of q where q stands for parameter to get the item we want.
   const handleSearch = (query) => {
     query.preventDefault();
     axios
@@ -44,22 +45,30 @@ const OrderView = ({
       .catch((err) => {});
   };
 
+  //This function handle the select menuitems.
   const handleSelectMenuItem = (selItem) => {
+    // 1. Storing selItems to updatedItem
     const updatedItem = { ...selItem };
+    // 2. find the index of an item of selectMenuItems that has the same id as
+    // the passed argument (selItems) and store in existingItemIndex
     const existingItemIndex = selectMenuItems.findIndex(
       (item) => item.id === selItem.id
     );
+    // 3. If existingItem is greater or equal to 0 it means that there is an item with the same id as selItem exist in selectMenuItems
+    // 4. Because of that we know the item to increase the quantity and store it in updatedSelectMenuItems array.
     if (existingItemIndex >= 0) {
       updatedItem.quantity = selectMenuItems[existingItemIndex].quantity + 1;
       const updatedSelectMenuItems = [...selectMenuItems];
       updatedSelectMenuItems[existingItemIndex] = updatedItem;
       setSelectMenuItems(updatedSelectMenuItems);
+      //5. If the quantity is less than 0 we set the initial quantity to 1 and add it to selectMenuItems.
     } else {
       updatedItem.quantity = 1;
       setSelectMenuItems([...selectMenuItems, updatedItem]);
     }
+    //6. Update the total price if quantity is = 1 then the total is add up by the price * 1
+    //After checking this function again, it does the same for both conditions. Well, i'll leave it as an easter-egg here.
     let total = totalPrice;
-
     if (updatedItem.quantity === 1) {
       total += updatedItem.price * updatedItem.quantity;
     } else {
@@ -92,7 +101,6 @@ const OrderView = ({
         <p id="view-header-menulabel">Menu Category </p>
       </div>
       <div className="order-view-search-cont">
-        {/* <p className="view-header">Order#00{currentOrder}</p> */}
         <form className="order-view-search-form">
           <div className="searchBar">
             <input
@@ -189,7 +197,6 @@ const OrderView = ({
             className="order-view-category-btn"
             id="category-bev-btn"
             value="desert"
-            // onClick={handleCategoryChange}
           >
             <img src="https://imgur.com/VfPhkvO.png"></img>
           </button>
