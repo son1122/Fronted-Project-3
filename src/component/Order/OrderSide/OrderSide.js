@@ -26,12 +26,18 @@ const OrderSide = ({
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
 
-      // .get(`http://localhost:3001/table`)
       .then((res) => {
         setAllTable(res.data);
       })
       .catch((err) => {});
   }, []);
+
+  //This function handle the decreasing menuitems in the OrderSide and remove it when it reached 0
+  //1. If each of the selectedMenuItems matched the id passed in the argument and the quantity is more than 0
+  // Decrease the quantity of the item by 1 and also decreate the total price by the item price
+  //2. Then return it, if the condition is not met then return as it was.
+  //3. then the updatedItems array is filtered only the item that have quantity more than 0
+  //4. then we get the updatedItems and set the select menu item as updated item
   const handleDecRemItem = (id) => {
     const updatedItems = selectMenuItems
       .map((menuitem) => {
@@ -115,13 +121,14 @@ const OrderSide = ({
       theme: "light",
     });
   };
+
+  //This confirmOrder function without anycondition it will do a post request of all the fields from the states, conditionals are for checking if the order is cancel and if the table is selected.
   let confirmOrder = () => {
     if (isFailed) {
       notiCancel();
     } else {
       const checkTable = () => {
         if (selectTable === null) {
-          // alert("PLEASE SELECT TABLE");
           notiFailed();
         } else {
           axios
@@ -213,16 +220,10 @@ const OrderSide = ({
           setIsFailed={setIsFailed}
           isFailed={isFailed}
           selectTable={selectTable}
-        >
-          {/* <div style={{ fontSize: "20px", position: "fixed", top: "5px" }}>
-            Order#00{currentOrder}
-          </div> */}
-          {/* <p>test</p> */}
-        </ModalConfirm>
+        ></ModalConfirm>
         <div
           className="order-side-confirm-btn"
           onClick={() => {
-            // confirmOrder();
             setIsModal(true);
           }}
         >

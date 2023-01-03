@@ -88,31 +88,26 @@ const CheckoutCancelButton = styled.button`
   }
 `;
 
+//Using lottie react and react-toastify for animations.
 export default function ModalConfirm({
   open,
-  children,
-  onClose,
   lottieRef,
-  currentOrder,
-  isModal,
   setIsModal,
-  confirmOrder,
   isFailed,
   setIsFailed,
   selTable,
-  selectTable,
   handleCheckout,
   tableOrderDetailState,
 }) {
   const [isSuccess, setIsSuccess] = useState(false);
-  // const [isFailed, setIsFailed] = useState(false);
   const [statusText, setStatusText] = useState("Confirm Order?");
 
-  // have to check if the order is empty if it is empty then fail
+  //This useEffect is use to control the modal.
   useEffect(() => {
-    console.log(isSuccess);
-    console.log(isFailed);
+    //This is a nested if else statement
+    //This is the outer layer, this outer layer check if a confirm or cancel button is clicked where "confirm" = "isSucess", and "cancel" = "isFailed"
     if (isSuccess) {
+      //This inner layer is checking if the order is less than 1 (not exist), to prevent the status to show success even though there are no menu items.
       if (tableOrderDetailState.length < 1) {
         lottie.loadAnimation({
           container: lottieRef.current,
@@ -126,6 +121,7 @@ export default function ModalConfirm({
           setIsModal(false);
           setStatusText("Confirm Payment?");
         }, 4000);
+        //This is the inner layer else statement if isSuccess and the menuitems is more than one then run this.
       } else {
         lottie.loadAnimation({
           container: lottieRef.current,
@@ -140,6 +136,7 @@ export default function ModalConfirm({
           setStatusText("Confirm Payment?");
         }, 4000);
       }
+      //This is the outer layer else if statement, pretty self explanatory, if the cancel button is clicked then fail animation and handleCheckout() is not included.
     } else if (isFailed) {
       lottie.loadAnimation({
         container: lottieRef.current,
@@ -153,18 +150,22 @@ export default function ModalConfirm({
         setStatusText("Confirm Payment?");
       }, 4000);
     }
+    //Reset all the status
     setIsFailed(false);
     setIsSuccess(false);
   }, [isSuccess, isFailed]);
 
+  //This is to check if the modal is not open then return null so the modal wont always show
   if (!open) return null;
 
+  //Handle confirm setting isSuccess to true and change the status text, when this is click it will trigger the useEffect which will then automatically run the conditionals
   const handleConfirmClick = () => {
     setIsFailed(false);
     setIsSuccess(true);
     setStatusText(`Confirming Payment for Table ${selTable}`);
   };
 
+  //Same as handleConfirmClick()
   const handleCancelClick = () => {
     setIsSuccess(false);
     setIsFailed(true);
