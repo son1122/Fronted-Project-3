@@ -145,9 +145,11 @@ const Menu = () => {
             console.log(data)
             setMenuitem(data)
         })
-        getData()
+        // getData()
     },[select]);
-
+    useEffect(() => {
+        getData()
+},[select]);
         return(
             <div className={"grid28"}>
                 <div>

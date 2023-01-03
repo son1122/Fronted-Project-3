@@ -12,10 +12,10 @@ import Seller from "./DashboardView/Seller";
 import Location from "./DashboardView/Location"
 
 const Dashboard = () => {
-    const [select,setSelect]=useState(10)
+    const [select,setSelect]=useState(0)
     return (
         <div className={"dashboard-grid"}>
-            {select==10&& <DashboardView/>}
+            {/*{select==10&& <DashboardView/>}*/}
             {select==0&&<Summary/>}
             {select==1&&<Menu/>}
             {select==2&&<Order/>}
