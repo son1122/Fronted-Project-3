@@ -1,6 +1,7 @@
 import "./OrderView.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import GridLoader from "react-spinners/GridLoader";
 
 const OrderView = ({
   menuItems,
@@ -14,6 +15,14 @@ const OrderView = ({
   totalPrice,
   currentOrder,
 }) => {
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   const handleCategoryChange = (event, category) => {
     event.preventDefault();
     setMenuItemsCategory(category);
@@ -133,7 +142,24 @@ const OrderView = ({
           </div>
         </form>
       </div>
-      <div className={"order-slide-horizon"}>{allMenuItems}</div>
+      <div
+        className={
+          isLoading ? "order-slide-horizon-loading" : "order-slide-horizon"
+        }
+      >
+        {isLoading ? (
+          <GridLoader
+            color={"#ff2531"}
+            loading={isLoading}
+            size={20}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          [allMenuItems]
+        )}
+      </div>
+
       <div className="order-view-category-cont">
         <div className="order-view-category">
           <button

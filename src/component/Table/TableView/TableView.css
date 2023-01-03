@@ -15,6 +15,17 @@
   background-color: #fafafa;
 }
 
+.table-slide-horizon-loading {
+  height: 73vh;
+  overflow: scroll;
+  padding: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fafafa;
+}
+
 .table-slide-horizon::-webkit-scrollbar {
   display: none;
 }

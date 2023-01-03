@@ -1,7 +1,8 @@
 import "./TableSide.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { forEach } from "lodash";
+import ModalCheckout from "../../Modal/ModalCheckout";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +20,10 @@ const TableSide = ({
 }) => {
   const [menuItem, setMenuItem] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [isFailed, setIsFailed] = useState(false);
+
+  const lottieRef = useRef(null);
   // Get Menu from data base
   useEffect(() => {
     axios
@@ -67,6 +72,19 @@ const TableSide = ({
     });
   };
 
+  const checkoutFailedNoItem = () => {
+    toast.error(`Payment Failed. No order in table ${selTable}`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   useEffect(() => {
     if (!selTable) {
     } else {
@@ -101,8 +119,12 @@ const TableSide = ({
   });
 
   const handleCheckout = () => {
-    checkoutSuccess();
-    setTableOrderDetail([]);
+    if (tableOrderDetailState.length > 0) {
+      checkoutSuccess();
+      setTableOrderDetail([]);
+    } else {
+      checkoutFailedNoItem();
+    }
     axios
       .put(`http://localhost:3001/order/status/${selTable}`)
       .then((res) => {})
@@ -154,7 +176,29 @@ const TableSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
-        <div className="order-side-confirm-btn" onClick={handleCheckout}>
+        {/* <div className="order-side-confirm-btn" onClick={handleCheckout}>
+          Checkout
+        </div> */}
+        <ModalCheckout
+          lottieRef={lottieRef}
+          open={isModal}
+          selTable={selTable}
+          isModal={isModal}
+          onClose={() => setIsModal(true)}
+          setIsModal={setIsModal}
+          isFailed={isFailed}
+          setIsFailed={setIsFailed}
+          handleCheckout={handleCheckout}
+          tableOrderDetailState={tableOrderDetailState}
+        >
+          {/* open={isModal} */}
+        </ModalCheckout>
+        <div
+          className="order-side-confirm-btn"
+          onClick={() => {
+            setIsModal(true);
+          }}
+        >
           Checkout
         </div>
       </div>
