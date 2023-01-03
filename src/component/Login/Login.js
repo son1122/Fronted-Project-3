@@ -18,15 +18,12 @@ const Login = (props) => {
     axios
       .post("http://localhost:3001/auth/login", formData)
       .then((res) => {
-        console.log(res.data);
         let token = res.data;
         localStorage.setItem("jwt", token);
         props.setLogin(true);
         navigate("/order");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (
@@ -60,7 +57,6 @@ const Login = (props) => {
               onChange={handleChange}
             />
           </h4>
-          {/* <button onClick={() => navigate("/signup")}>SignUp</button> */}
           <p className="signup-btn" onClick={() => navigate("/signup")}>
             Register
           </p>
@@ -71,9 +67,6 @@ const Login = (props) => {
           onClick={handleSubmit}
           value={"Login"}
         />
-        {/*<div className={"sign-button-grid sign-button"}>*/}
-
-        {/*</div>*/}
       </div>
     </div>
   );

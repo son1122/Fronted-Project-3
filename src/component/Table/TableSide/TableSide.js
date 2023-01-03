@@ -22,12 +22,9 @@ const TableSide = ({
     axios
       .get(`http://localhost:3001/menu_items`)
       .then((res) => {
-        console.log("ALL menu DATA FROM BACKEND >>> ", res.data);
         setMenuItem(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   //Map menu API
@@ -56,78 +53,19 @@ const TableSide = ({
     );
   });
 
-  // Map orderdetail API
-  // let tableOrderDetail = 0;
-  // try {
-  //   tableOrderDetail = orderDetail.map((item) => {
-  //     return {
-  //       id: item.order_id,
-  //       menuItemId: item.menu_item_id,
-  //       quantity: item.quantity,
-  //     };
-  //   });
-  // } catch (error) {}
-
   const handleCheckout = () => {
     alert("Payment success");
     setTableOrderDetail([]);
     axios
       .put(`http://localhost:3001/order/status/${selTable}`)
-      .then((res) => {
-        console.log("update test >", res);
-      })
-      .catch((err) => {
-        console.log("update err >", err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
   return (
-    // <div className={"table-side-grid"}>
-    //   <p>Table Number {selTable}</p>
-    //   <p>order summary</p>
-    //   <div className={"table-side-detail-grid"}>
-    //     <div>
-    //       <div className={"table-side-detail-container"}>
-    //         {allOrderDetailDataFromTable}
-    //       </div>
-    //       {/* <p>{menuItem.id}</p> */}
-    //       {/* {console.log(tableOrderDetail, menuDetail)} */}
-    //     </div>
-    //   </div>
-    //   <div className="price-cont">
-    //     <div className="total-price-left">
-    //       <p className="total-price-label-total" id="service">
-    //         Service Charge (0%)
-    //       </p>
-    //       <p className="total-price-label-total" id="tax">
-    //         Tax (0%)
-    //       </p>
-    //       <p className="total-price-label-total" id="total">
-    //         Total
-    //       </p>
-    //     </div>
-    //     <div className="total-price-right">
-    //       <p className="total-price-label-total" id="service">
-    //         0 Baht
-    //       </p>
-    //       <p className="total-price-label-total" id="tax">
-    //         0 Baht
-    //       </p>
-    //       <p className="total-price-label-total" id="total">
-    //         0 Baht
-    //       </p>
-    //     </div>
-    //   </div>
-
-    //   <div className="order-side-confirm-btn-cont">
-    //     <div className="order-side-confirm-btn">Check Out</div>
-    //   </div>
-    // </div>
-
     <div className={"order-side-grid"}>
       <h2>Table: {selTable}</h2>
       <div className={"order-side-detail-grid"}>
         <div className={"table-selection"}>
-          {/* <label htmlFor="order-side-table-list">Select Table</label> */}
           <div className="custom-select">
             <h3>Customer: Jane Doe </h3>
           </div>

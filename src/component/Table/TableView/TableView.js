@@ -21,12 +21,10 @@ const TableView = ({
     axios
       .get(`http://localhost:3001/orderdetail/${selTableNumber}`)
       .then((res) => {
-        console.log("Get table Order Id from Selected Number >>>>>", res.data);
         setTableOrderDetail(res.data.menuItems);
       })
       .catch((err) => {
         setTableOrderDetail([]);
-        console.log("err", err);
       });
   };
 

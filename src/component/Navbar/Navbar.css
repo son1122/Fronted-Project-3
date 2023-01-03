@@ -23,6 +23,7 @@
 }
 
 .navbar-item-cont:hover {
+  transition: 0.5s;
   opacity: 80%;
 }
 

@@ -32,9 +32,7 @@ const OrderView = ({
       .then((res) => {
         setMenuItems(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const handleSelectMenuItem = (selItem) => {
@@ -63,13 +61,16 @@ const OrderView = ({
   };
   let allMenuItems = menuItems.map((menuitem) => {
     return (
-      <div key={menuitem.id} className="order-view-item-cont">
+      <div
+        key={menuitem.id}
+        className="order-view-item-cont"
+        onClick={() => handleSelectMenuItem(menuitem)}
+      >
         <img
           className="order-view-menu-item"
           style={{ width: "200px" }}
           src={menuitem.img}
           alt={menuitem.name}
-          onClick={() => handleSelectMenuItem(menuitem)}
         />
         <h2>{menuitem.name}</h2>
         <h2>฿ {menuitem.price}</h2>

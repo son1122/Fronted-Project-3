@@ -22,12 +22,9 @@ const OrderSide = ({
 
       // .get(`http://localhost:3001/table`)
       .then((res) => {
-        console.log("ALL TABLE DATA FROM BACKEND >>> ", res.data);
         setAllTable(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   const handleDecRemItem = (id) => {
     const updatedItems = selectMenuItems
@@ -74,8 +71,6 @@ const OrderSide = ({
     );
   });
   let confirmOrder = () => {
-    console.log("Menu Items >>> ", selectMenuItems);
-    console.log("Select Table >>> ", selectTable);
     const checkTable = () => {
       if (selectTable === null) {
         alert("PLEASE SELECT TABLE");
@@ -88,13 +83,10 @@ const OrderSide = ({
             order_date: new Date(),
             status: "inprogress",
           })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+          .then((res) => {})
+          .catch((err) => {});
         alert("Created Order successfully.");
+
         setSelectMenuItems([]);
         // messageApi.info("Created Order Successfully");
       }

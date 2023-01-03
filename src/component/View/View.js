@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 const View = () => {
   let { page } = useParams();
-  console.log(page);
   return (
     <div>
       {page === "order" && <Order />}
