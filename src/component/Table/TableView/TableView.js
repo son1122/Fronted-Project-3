@@ -1,5 +1,7 @@
 import axios from "axios";
 import "./TableView.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const TableView = ({
   setSelTable,
   order,
@@ -25,6 +27,7 @@ const TableView = ({
       })
       .catch((err) => {
         setTableOrderDetail([]);
+        //This will response in Developer Mode > Network > Response, showing that there is no order for the selected table. [GET 404 (Not Found)], is expected to be shown in console)
       });
   };
 
@@ -61,6 +64,7 @@ const TableView = ({
         <p id="view-header-menulabel">Table View </p>
       </div>
       <div className="table-slide-horizon">{allTables}</div>
+      <div></div>
     </div>
   );
 };

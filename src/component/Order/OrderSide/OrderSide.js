@@ -1,10 +1,11 @@
-import { render } from "@testing-library/react";
-import { tab } from "@testing-library/user-event/dist/tab";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
 import "./OrderSide.css";
 import { isCursorAtEnd } from "@testing-library/user-event/dist/utils";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const OrderSide = ({
   selectMenuItems,
   totalPrice,
@@ -70,10 +71,38 @@ const OrderSide = ({
       </div>
     );
   });
+  const notiSuccess = () => {
+    toast.success(`Created Order: ${currentOrder} Successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  const notiFailed = () => {
+    toast.error(
+      `Failed to create Order: ${currentOrder} Please Select a table`,
+      {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+  };
   let confirmOrder = () => {
     const checkTable = () => {
       if (selectTable === null) {
-        alert("PLEASE SELECT TABLE");
+        // alert("PLEASE SELECT TABLE");
+        notiFailed();
       } else {
         axios
           .post("http://localhost:3001/order", {
@@ -85,10 +114,8 @@ const OrderSide = ({
           })
           .then((res) => {})
           .catch((err) => {});
-        alert("Created Order successfully.");
-
+        notiSuccess();
         setSelectMenuItems([]);
-        // messageApi.info("Created Order Successfully");
       }
     };
     checkTable();
@@ -98,16 +125,15 @@ const OrderSide = ({
       <h2>Order#00{currentOrder}</h2>
       <div className={"order-side-detail-grid"}>
         <div className={"table-selection"}>
-          {/* <label htmlFor="order-side-table-list">Select Table</label> */}
           <div className="custom-select">
             <select
               className="order-side-table-list"
               form="order-side-form"
-              defaultValue={"placeholder"}
+              defaultValue={"defaultselect"}
               placeholder="Select Table"
               onChange={(e) => setSelectTable(e.target.value)}
             >
-              <option selected disabled value={null}>
+              <option disabled value={"defaultselect"}>
                 Select Table
               </option>
               {tableList}
@@ -147,10 +173,16 @@ const OrderSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
-        <div className="order-side-confirm-btn" onClick={confirmOrder}>
+        <div
+          className="order-side-confirm-btn"
+          onClick={() => {
+            confirmOrder();
+          }}
+        >
           Confirm
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
