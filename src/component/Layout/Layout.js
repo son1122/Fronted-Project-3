@@ -16,6 +16,7 @@ const Layout = (props) => {
             {props.login?(<View/>):<NotFound/>}
             <Navbar/>
         </div>
+
     );
 }
 

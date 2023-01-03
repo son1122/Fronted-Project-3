@@ -7,8 +7,3 @@
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
 }
-.layout-grid {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 90vh 10vh;
-}
