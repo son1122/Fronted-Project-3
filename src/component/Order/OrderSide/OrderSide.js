@@ -1,13 +1,11 @@
-import { render } from "@testing-library/react";
-import { tab } from "@testing-library/user-event/dist/tab";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
 import "./OrderSide.css";
 import { isCursorAtEnd } from "@testing-library/user-event/dist/utils";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalConfirm from "../../Modal/ModalConfirm.js";
 const OrderSide = ({
   selectMenuItems,
   totalPrice,
@@ -17,6 +15,11 @@ const OrderSide = ({
 }) => {
   const [allTable, setAllTable] = useState([]);
   const [selectTable, setSelectTable] = useState(null);
+  const [isModal, setIsModal] = useState(false);
+  const [isFailed, setIsFailed] = useState(false);
+
+  //Lottie
+  const lottieRef = useRef(null);
   useEffect(() => {
     axios
       .get(`http://localhost:3001/table`, {
@@ -27,9 +30,7 @@ const OrderSide = ({
       .then((res) => {
         setAllTable(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   const handleDecRemItem = (id) => {
     const updatedItems = selectMenuItems
@@ -102,31 +103,51 @@ const OrderSide = ({
       }
     );
   };
+  const notiCancel = () => {
+    toast.error(`Order: ${currentOrder} Cancelled`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   let confirmOrder = () => {
-    const checkTable = () => {
-      if (selectTable === null) {
-        // alert("PLEASE SELECT TABLE");
-        notiFailed();
-      } else {
-        axios
-          .post("http://localhost:3001/order", {
-            menuItems: selectMenuItems,
-            table_number: selectTable,
-            customer_id: null,
-            order_date: new Date(),
-            status: "inprogress",
-          })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        notiSuccess();
-        setSelectMenuItems([]);
-      }
-    };
-    checkTable();
+    if (isFailed) {
+      notiCancel();
+    } else {
+      const checkTable = () => {
+        if (selectTable === null) {
+          // alert("PLEASE SELECT TABLE");
+          notiFailed();
+        } else {
+          axios
+            .post(
+              "http://localhost:3001/order",
+              {
+                menuItems: selectMenuItems,
+                table_number: selectTable,
+                customer_id: null,
+                order_date: new Date(),
+                status: "inprogress",
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                },
+              }
+            )
+            .then((res) => {})
+            .catch((err) => {});
+          notiSuccess();
+          setSelectMenuItems([]);
+        }
+      };
+      checkTable();
+    }
   };
   return (
     <div className={"order-side-grid"}>
@@ -181,10 +202,28 @@ const OrderSide = ({
         </div>
       </div>
       <div className="order-side-confirm-btn-cont">
+        <ModalConfirm
+          lottieRef={lottieRef}
+          open={isModal}
+          currentOrder={currentOrder}
+          setIsModal={setIsModal}
+          isModal={isModal}
+          onClose={() => setIsModal(false)}
+          confirmOrder={confirmOrder}
+          setIsFailed={setIsFailed}
+          isFailed={isFailed}
+          selectTable={selectTable}
+        >
+          {/* <div style={{ fontSize: "20px", position: "fixed", top: "5px" }}>
+            Order#00{currentOrder}
+          </div> */}
+          {/* <p>test</p> */}
+        </ModalConfirm>
         <div
           className="order-side-confirm-btn"
           onClick={() => {
-            confirmOrder();
+            // confirmOrder();
+            setIsModal(true);
           }}
         >
           Confirm

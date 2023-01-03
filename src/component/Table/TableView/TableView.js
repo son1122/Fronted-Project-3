@@ -2,6 +2,9 @@ import axios from "axios";
 import "./TableView.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import GridLoader from "react-spinners/GridLoader";
+import React, { useState, useEffect } from "react";
 const TableView = ({
   setSelTable,
   order,
@@ -14,6 +17,15 @@ const TableView = ({
   tableOrderDetailState,
   setTableOrderDetail,
 }) => {
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   const inputSelTable = async (event) => {
     await setSelTable(event);
     getOrderWithNameAndPrice(event);
@@ -21,7 +33,9 @@ const TableView = ({
 
   const getOrderWithNameAndPrice = (selTableNumber) => {
     axios
-      .get(`http://localhost:3001/orderdetail/${selTableNumber}`)
+      .get(`http://localhost:3001/orderdetail/${selTableNumber}`,{
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      })
       .then((res) => {
         setTableOrderDetail(res.data.menuItems);
       })
@@ -63,7 +77,25 @@ const TableView = ({
       <div className="order-view-header-cont">
         <p id="view-header-menulabel">Table View </p>
       </div>
-      <div className="table-slide-horizon">{allTables}</div>
+
+      <div
+        className={
+          isLoading ? "table-slide-horizon-loading" : "table-slide-horizon"
+        }
+      >
+        {isLoading ? (
+          <GridLoader
+            color={"#ff2531"}
+            loading={isLoading}
+            size={20}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          [allTables]
+        )}
+      </div>
+      {/* <div className="table-slide-horizon">{allTables}</div> */}
       <div></div>
     </div>
   );

@@ -47,7 +47,6 @@ const Signup = () => {
           phone: phone,
         })
         .then(function (response) {
-          console.log(response.data.status);
           if (response.data.status == "signUp") {
             navigate("/login");
           } else {
@@ -61,9 +60,7 @@ const Signup = () => {
             }
           }
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+        .catch(function (error) {});
     }
   }
   // admin,password,owner@mail.com,000-000-0000

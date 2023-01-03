@@ -23,9 +23,7 @@ const Login = (props) => {
         props.setLogin(true);
         navigate("/order");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (
