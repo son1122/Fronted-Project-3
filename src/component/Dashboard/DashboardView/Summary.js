@@ -147,7 +147,7 @@ const Summary = (props) => {
         ],
     };
     return (
-        <div style={{display:"grid",gridTemplateColumns:"50% 50% 50% 50%",gridTemplateRows:"50% 50%",overflow:"scroll",position:"relative",padding:"5%"}}>
+        <div style={{display:"grid",gridTemplateColumns:"50% 50%",gridTemplateRows:"50% 50% 50% 50%",overflow:"scroll",position:"relative",padding:"5%"}}>
             <div>
                 <Pie {...config} />
                 <Pie {...config} />
@@ -156,14 +156,7 @@ const Summary = (props) => {
                 <Pie {...config} />
                 <Pie {...config} />
             </div>
-            <div>
-                <Pie {...config} />
-                <Pie {...config} />
-            </div>
-            <div>
-                <Pie {...config} />
-                <Pie {...config} />
-            </div>
+
         </div>
     );
 };
