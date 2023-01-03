@@ -48,7 +48,28 @@ const Menu = () => {
     autoFit: true,
     // behaviors: ['drag-canvas', 'zoom-canvas', 'drag-node'],
     nodeCfg: {
+      title: {
+        containerStyle: {
+          fill: "black",
+        },
+        style: {
+          fill: "#000",
+          fontSize: 12,
+        },
+      },
+      style: {
+        fill: "#E6EAF1",
+        stroke: "#B2BED5",
+        radius: [2, 2, 2, 2],
+      },
       autoWidth: true,
+      items: {
+        padding: 6,
+        fill: "green",
+        containerStyle: {
+          fill: "red",
+        },
+      },
     },
   });
   const handleChangeSelect = (e) => {
@@ -56,9 +77,12 @@ const Menu = () => {
   };
   const getData = () => {
     axios
-      .get(`http://localhost:3001/dashboard/menu/${select}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
-      })
+      .get(
+        `https://backend-sei-project-3.cyclic.app/dashboard/menu/${select}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+        }
+      )
       .then((res) => {
         console.log(res.data);
         // setData(data.value.title= res.data.name)
@@ -103,23 +127,6 @@ const Menu = () => {
         setConfig({
           data,
           autoFit: true,
-          //   nodeCfg: {
-          //     title: {
-          //       containerStyle: {
-          //         fill: "#ff2531",
-          //       },
-          //     },
-          //     autoWidth: true,
-          //     style: {
-          //       stroke: "#ff2531",
-          //     },
-          //     nodeStateStyles: {
-          //       hover: {
-          //         stroke: "green",
-          //         lineWidth: "2px",
-          //       },
-          //     },
-          //   },
           nodeCfg: {
             title: {
               containerStyle: {
@@ -143,7 +150,7 @@ const Menu = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/dashboard/menuitem`, {
+      .get(`https://backend-sei-project-3.cyclic.app/dashboard/menuitem`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
       .then((resu) => {
@@ -168,12 +175,7 @@ const Menu = () => {
     <div className={"grid28"}>
       <div>
         <h1>Menu Ingredient View</h1>
-        <select
-          name="<menu>"
-          id="menu"
-          className="order-side-table-list"
-          onChange={handleChangeSelect}
-        >
+        <select name="<menu>" id="menu" onChange={handleChangeSelect}>
           <option value="" selected disabled hidden>
             Choose Menu
           </option>
