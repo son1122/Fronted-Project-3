@@ -22,7 +22,9 @@ const TableSide = ({
   // Get Menu from data base
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/menu_items`)
+      .get(`http://localhost:3001/menu_items`,{
+      headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    })
       .then((res) => {
         setMenuItem(res.data);
       })
@@ -118,7 +120,9 @@ const TableSide = ({
     checkoutSuccess();
     setTableOrderDetail([]);
     axios
-      .put(`http://localhost:3001/order/status/${selTable}`)
+      .put(`http://localhost:3001/order/status/${selTable}`,{},{
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      })
       .then((res) => {
         console.log("update test >", res);
       })
