@@ -91,7 +91,7 @@ export default function Location(){
                         <Customer
                             lat={dataCus.Location.lat}
                             lng={dataCus.Location.lng}
-                            text={dataCus.name}
+                            text={dataCus.firstname+"   "+dataCus.lastname}
                         />
                     )
                 })
