@@ -35,12 +35,12 @@ export default function Location(){
     const [dataSeller,setDataSeller]=useState(<Customer
         lat={13}
         lng={100}
-        text={"test1"}
+        text={"tonson"}
     />)
     const [dataCustomer,setDataCustomer] = useState(                        <Customer
         lat={13}
         lng={100}
-        text={"test"}
+        text={"tonson"}
     />)
     const [tag,setTag]=useState(
         <div style={{ height: '90vh', width: '100%' }}>
