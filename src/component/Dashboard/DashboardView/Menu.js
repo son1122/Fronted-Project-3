@@ -212,7 +212,6 @@ const Menu = () => {
         style={{ backgroundColor: "#fafafa" }}
         {...config}
       />
-      ;
     </div>
   );
 };
