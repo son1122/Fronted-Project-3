@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import axios from "axios";
 
+import GridLoader from "react-spinners/GridLoader";
 const AnyReactComponent = ({ text }) => (
   <div>
     <img
@@ -95,6 +96,13 @@ const Customer = ({ text }) => (
 );
 
 export default function Location() {
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const defaultProps = {
     center: {
       lat: 13.685321440355466,
@@ -205,5 +213,19 @@ export default function Location() {
       </GoogleMapReact>
     );
   }, [dataSeller]);
-  return <div>{tag}</div>;
+  return (
+    <div className={isLoading ? "summary-loading-center" : "grid28"}>
+      {isLoading ? (
+        <GridLoader
+          color={"#ff2531"}
+          loading={isLoading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div style={{ height: "90vh" }}>{tag}</div>
+      )}
+    </div>
+  );
 }

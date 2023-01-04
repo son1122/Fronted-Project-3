@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Pie } from "@ant-design/plots";
+import GridLoader from "react-spinners/GridLoader";
 const Summary = (props) => {
   const [data, setData] = useState([
     {
@@ -9,6 +10,7 @@ const Summary = (props) => {
       value: 27,
     },
   ]);
+
   const [menuItem, setMenuitem] = useState(
     <option value="loading">Loading</option>
   );
@@ -18,6 +20,13 @@ const Summary = (props) => {
   const [formData, setFormData] = useState({});
   const [totalOrder, setTotalOrder] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const handleChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -34,9 +43,7 @@ const Summary = (props) => {
       .get(`https://backend-sei-project-3.cyclic.app/customer/data`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
-      .then((res) => {
-        console.log(res);
-      });
+      .then((res) => {});
   };
   useEffect(() => {
     const select = axios
@@ -48,8 +55,6 @@ const Summary = (props) => {
         let price = 0;
         console.log(resu);
         let data = resu.data.map((name, index) => {
-          console.log(name);
-
           for (let x = 0; x < name.MenuItems.length; x++) {
             i += 1;
             price =
@@ -62,7 +67,6 @@ const Summary = (props) => {
             </option>
           );
         });
-        console.log(i);
         setTotalOrder(totalOrder + i);
         setMenuitem(data);
         setTotalPrice(price);
@@ -71,7 +75,6 @@ const Summary = (props) => {
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
           })
           .then((res) => {
-            console.log(res);
             let insert = [];
             for (let i = 0; i < res.data.length; i++) {
               console.log(res.data[i].name);
@@ -102,10 +105,7 @@ const Summary = (props) => {
           }
         )
         .then((resu) => {
-          console.log(resu);
-
           let data = resu.data.MenuItems.map((name, index) => {
-            console.log(name);
             // <p>{name.name}</p>
             return (
               <div className="customer-db-third-customerorders-detail-cont-2">
@@ -151,26 +151,43 @@ const Summary = (props) => {
   };
   return (
     <div
-      className="summary-canvas"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "50% 50%",
-        gridTemplateRows: "50% 50% 50% 50%",
-        overflow: "scroll",
-        position: "relative",
-        padding: "5%",
-        backgroundColor: "#fafafa",
-      }}
+      className={isLoading ? "summary-loading-center" : null}
+      // className={
+      //   isLoading ? "order-slide-horizon-loading" : "order-slide-horizon"
+      // }
     >
-      <div>
-        <h2></h2>
-        <Pie {...config} />
-        <Pie {...config} />
-      </div>
-      <div>
-        <Pie {...config} />
-        <Pie {...config} />
-      </div>
+      {isLoading ? (
+        <GridLoader
+          color={"#ff2531"}
+          loading={isLoading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div
+          className="summary-canvas"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "50% 50%",
+            gridTemplateRows: "50% 50% 50% 50%",
+            overflow: "scroll",
+            position: "relative",
+            padding: "5%",
+            backgroundColor: "#fafafa",
+          }}
+        >
+          <div>
+            <h2></h2>
+            <Pie {...config} />
+            <Pie {...config} />
+          </div>
+          <div>
+            <Pie {...config} />
+            <Pie {...config} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
