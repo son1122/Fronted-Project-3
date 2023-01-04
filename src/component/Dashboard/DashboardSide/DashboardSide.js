@@ -6,7 +6,7 @@ const DashboardSide = (props) => {
     "Menu",
     "Order",
     "Customer",
-    "Employer",
+    "Employee",
     "Ingredient",
     "Seller",
     "Location",
@@ -29,11 +29,13 @@ const DashboardSide = (props) => {
       <h2
         style={{
           backgroundColor: "#ff2531",
-          height: "100%",
           color: "white",
+          height: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          margin: "0",
+          marginBottom: "25px",
         }}
       >
         Dashboard Category
