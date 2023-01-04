@@ -9,7 +9,7 @@
   height: 73vh;
   overflow: scroll;
   padding: 2.5rem;
-  justify-content: flex-start;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   background-color: #fafafa;

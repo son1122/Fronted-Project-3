@@ -163,6 +163,7 @@ const Summary = (props) => {
       }}
     >
       <div>
+        <h2></h2>
         <Pie {...config} />
         <Pie {...config} />
       </div>
