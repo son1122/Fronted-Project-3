@@ -175,7 +175,7 @@ const Summary = (props) => {
             position: "relative",
             padding: "5%",
             backgroundColor: "#fafafa",
-            height: "90vh",
+            height: "75vh",
           }}
         >
           <div>
