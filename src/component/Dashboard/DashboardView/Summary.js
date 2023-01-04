@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Pie } from "@ant-design/plots";
 import GridLoader from "react-spinners/GridLoader";
+import Word from "./word";
+import DemoLine from "./revenue";
+import DemoMix from "./test";
 const Summary = (props) => {
   const [data, setData] = useState([
     {
@@ -77,14 +80,12 @@ const Summary = (props) => {
           .then((res) => {
             let insert = [];
             for (let i = 0; i < res.data.length; i++) {
-              console.log(res.data[i].name);
               insert.push({ type: res.data[i].name, value: 0 });
             }
             resu.data.forEach((name, index) => {
               for (let x = 0; x < name.MenuItems.length; x++) {
                 i += 1;
                 let value = name.MenuItems[x].name;
-                console.log(name.MenuItems[x].name);
                 insert.find(
                   (o) => o.type === name.MenuItems[x].name
                 ).value += 1;
@@ -106,7 +107,6 @@ const Summary = (props) => {
         )
         .then((resu) => {
           let data = resu.data.MenuItems.map((name, index) => {
-            // <p>{name.name}</p>
             return (
               <div className="customer-db-third-customerorders-detail-cont-2">
                 <div className="customer-db-third-customerorders-detail">
@@ -175,16 +175,17 @@ const Summary = (props) => {
             position: "relative",
             padding: "5%",
             backgroundColor: "#fafafa",
+            height: "90vh",
           }}
         >
           <div>
             <h2></h2>
             <Pie {...config} />
-            <Pie {...config} />
+            <Word />
           </div>
           <div>
-            <Pie {...config} />
-            <Pie {...config} />
+            <DemoLine />
+            <DemoMix />
           </div>
         </div>
       )}
