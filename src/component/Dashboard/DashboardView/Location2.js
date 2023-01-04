@@ -9,16 +9,16 @@ const AnyReactComponent = ({ text }) => <div>
 </div>;
 
 const Restaurant = ({ text }) => <div>
-    <img style={{width:"50px"}} src={"https://thumbs.dreamstime.com/b/simple-restaurant-icon-can-flat-design-restaurant-icon-vector-restaurant-symbol-130849249.jpg"}/>
+    <img style={{width:"50px"}} src={"https://images-ext-1.discordapp.net/external/c_QEmvWUPQdNab70SuGaBY6WwgJssu1ErqJ3UNq0VzA/https/cdn-icons-png.flaticon.com/512/6985/6985073.png"}/>
     {text}
 </div>;
 const Seller = ({ text }) => <div>
-    <img style={{width:"50px"}} src={"https://thumbs.dreamstime.com/b/simple-restaurant-icon-can-flat-design-restaurant-icon-vector-restaurant-symbol-130849249.jpg"}/>
+    <img style={{width:"50px"}} src={"https://images-ext-1.discordapp.net/external/jU-HDJjboHvK7lMvC_BkBSX62LeLJsRGNFUl8kWzk-w/https/cdn-icons-png.flaticon.com/512/8365/8365935.png"}/>
     {text}
     <h3>Type Seller</h3>
 </div>;
 const Customer = ({ text }) => <div>
-    <img style={{width:"50px"}} src={"https://thumbs.dreamstime.com/b/simple-restaurant-icon-can-flat-design-restaurant-icon-vector-restaurant-symbol-130849249.jpg"}/>
+    <img style={{width:"50px"}} src={"https://images-ext-1.discordapp.net/external/ial0BMhDeZBdOFlvSCFX3qQUX15kk8nn3y-wDgXku-4/https/cdn-icons-png.flaticon.com/512/3305/3305843.png"}/>
     {text}
     <h3>Type Customer</h3>
 </div>;
