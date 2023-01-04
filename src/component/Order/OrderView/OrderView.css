@@ -39,9 +39,13 @@ body {
   overflow: auto;
   width: 75vw;
   padding: 2.5rem;
-  justify-content: flex-start;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
+}
+
+.order-slide-horizon::-webkit-scrollbar {
+  display: none;
 }
 
 .order-slide-horizon-loading {
