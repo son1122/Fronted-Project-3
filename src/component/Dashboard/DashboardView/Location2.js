@@ -104,10 +104,10 @@ export default function Location() {
     zoom: 14,
   };
   const [dataSeller, setDataSeller] = useState(
-    <Customer lat={13} lng={100} text={"test1"} />
+    <Customer lat={13} lng={100} text={"ton"} />
   );
   const [dataCustomer, setDataCustomer] = useState(
-    <Customer lat={13} lng={100} text={"test"} />
+    <Customer lat={13} lng={100} text={"ton"} />
   );
   const [tag, setTag] = useState(
     <div style={{ height: "90vh", width: "100%" }}>
