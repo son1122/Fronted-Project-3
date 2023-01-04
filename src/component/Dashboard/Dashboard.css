@@ -43,3 +43,22 @@
   flex-direction: column;
   /* margin-bottom: 100px; */
 }
+
+.summary-loading-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seller-list-item {
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #ff2531;
+  color: #fff;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 0%;
+}

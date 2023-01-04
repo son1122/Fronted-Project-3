@@ -4,11 +4,19 @@ import ReactDOM from "react-dom";
 import { DecompositionTreeGraph } from "@ant-design/graphs";
 import axios from "axios";
 
+import GridLoader from "react-spinners/GridLoader";
 const Menu = () => {
   const [select, setSelect] = useState();
   const [menuItem, setMenuitem] = useState(
     <option value="loading">Loading</option>
   );
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const items = [
     {
       label: "1st menu item",
@@ -193,25 +201,37 @@ const Menu = () => {
     getData();
   }, [select]);
   return (
-    <div className={"grid28"}>
-      <div>
-        <h1>Menu Ingredient View</h1>
-        <select
-          name="<menu>"
-          id="menu"
-          className={"order-side-table-list"}
-          onChange={handleChangeSelect}
-        >
-          <option value="" selected disabled hidden>
-            Choose Menu
-          </option>
-          {menuItem}
-        </select>
-      </div>
-      <DecompositionTreeGraph
-        style={{ backgroundColor: "#fafafa" }}
-        {...config}
-      />
+    <div className={isLoading ? "summary-loading-center" : "grid28"}>
+      {isLoading ? (
+        <GridLoader
+          color={"#ff2531"}
+          loading={isLoading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div style={{ height: "80vh" }}>
+          <div style={{ marginBottom: "10px" }}>
+            <h1>Menu Ingredient View</h1>
+            <select
+              name="<menu>"
+              id="menu"
+              className={"order-side-table-list"}
+              onChange={handleChangeSelect}
+            >
+              <option value="" selected disabled hidden>
+                Choose Menu
+              </option>
+              {menuItem}
+            </select>
+          </div>
+          <DecompositionTreeGraph
+            style={{ backgroundColor: "#fafafa" }}
+            {...config}
+          />
+        </div>
+      )}
     </div>
   );
 };

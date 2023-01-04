@@ -2,8 +2,16 @@ import "./DashboardView.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import GridLoader from "react-spinners/GridLoader";
 const Customer = () => {
   const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   useEffect(() => {
     axios
       .get(`https://backend-sei-project-3.cyclic.app/dashboard/customer`, {
@@ -39,9 +47,21 @@ const Customer = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Customer List</h1>
-      <div className="customer-list-container">{data}</div>
+    <div className={isLoading ? "summary-loading-center" : "grid28"}>
+      {isLoading ? (
+        <GridLoader
+          color={"#ff2531"}
+          loading={isLoading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div>
+          <h1>Customer List</h1>
+          <div className="customer-list-container">{data}</div>
+        </div>
+      )}
     </div>
   );
 };
