@@ -2,8 +2,16 @@ import "./DashboardView.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import GridLoader from "react-spinners/GridLoader";
 const Order = () => {
   const [data, setData] = useState();
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   useEffect(() => {
     axios
       .get(`https://backend-sei-project-3.cyclic.app/dashboard/order`, {
@@ -43,9 +51,28 @@ const Order = () => {
   }, []);
 
   return (
-    <div style={{ overflow: "auto" }}>
-      <h1>Order List</h1>
-      <div className="order-orderlist-cont">{data}</div>
+    <div
+      className={isLoading ? "summary-loading-center" : null}
+      // className={
+      //   isLoading ? "order-slide-horizon-loading" : "order-slide-horizon"
+      // }
+    >
+      {isLoading ? (
+        <GridLoader
+          color={"#ff2531"}
+          loading={isLoading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div style={{ height: "90vh" }}>
+          <div style={{ overflow: "auto" }}>
+            <h1>Order List</h1>
+            <div className="order-orderlist-cont">{data}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

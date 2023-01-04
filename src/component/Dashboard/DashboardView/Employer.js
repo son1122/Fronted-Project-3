@@ -3,9 +3,17 @@ import "../Dashboard.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import GridLoader from "react-spinners/GridLoader";
 const Employer = () => {
   const [dataChef, setDataChef] = useState();
   const [dataWaiter, setDataWaiter] = useState();
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   useEffect(() => {
     axios
       .get(`https://backend-sei-project-3.cyclic.app/dashboard/chef`, {
@@ -72,15 +80,30 @@ const Employer = () => {
   }, []);
 
   return (
-    <div className={"dashboard-grid-half"} style={{ overflow: "auto" }}>
-      <div>
-        <h1>Chef List</h1>
-        <div className="employer-list-cont-chef">{dataChef}</div>
-      </div>
-      <div>
-        <h1>Waiter List</h1>
-        <div className="employer-list-cont-waiter">{dataWaiter}</div>
-      </div>
+    <div className={isLoading ? "summary-loading-center" : "grid28"}>
+      {isLoading ? (
+        <GridLoader
+          color={"#ff2531"}
+          loading={isLoading}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div
+          className={"dashboard-grid-half"}
+          style={{ overflow: "auto", height: "90vh" }}
+        >
+          <div>
+            <h1>Waiter List</h1>
+            <div className="employer-list-cont-chef">{dataChef}</div>
+          </div>
+          <div>
+            <h1>Chef List</h1>
+            <div className="employer-list-cont-waiter">{dataWaiter}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
