@@ -12,7 +12,25 @@ const Word = () => {
     const asyncFetch = () => {
         fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/antv-keywords.json')
             .then((response) => response.json())
-            .then((json) => setData(json))
+            .then((json) => setData([   {     "value": 5,     "name": "Fried Rice"   },
+                {     "value": 5,     "name": "Pad Kra Pao"   },
+                {     "value": 7,     "name": "Tom Yum Kun"   },
+                {     "value": 10,     "name": "Burger King"   },
+                {     "value": 9,     "name": "Panera Bread"   },
+                {     "value": 8,     "name": "In-N-Out"   },
+                {     "value": 6,     "name": "Jack In The Box"   },
+                {     "value": 6,     "name": "Five Guys"   },
+                {     "value": 6,     "name": "Chipotle"   },
+                {     "value": 10,     "name": "McDonalds"   },
+                {     "value": 10,     "name": "KFC"   },
+                {     "value": 7,     "name": "Jamba Juice"   },
+                {     "value": 8,     "name": "Chick-fil-A"   },
+                {     "value": 11,     "name": "Starbucks"   },
+                {     "value": 8,     "name": "Taco Bell"   },
+                {     "value": 8,     "name": "Dairy Queen"   },
+                {     "value": 9,     "name": "Subway"   },
+                {     "value": 5,     "name": "Sonic"   },
+                {     "value": 5,     "name": "Water"   }]))
             .catch((error) => {
                 console.log('fetch data failed', error);
             });
@@ -27,8 +45,6 @@ const Word = () => {
             fontSize: [8, 32],
             rotation: 0,
         },
-        // 返回值设置成一个 [0, 1) 区间内的值，
-        // 可以让每次渲染的位置相同（前提是每次的宽高一致）。
         random: () => 0.5,
     };
 

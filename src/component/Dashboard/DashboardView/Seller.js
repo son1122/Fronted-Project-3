@@ -16,7 +16,7 @@ const Seller = () => {
                     <div>
 
                         <h2>{index+1} ID : {name.id} Name : {name.name}</h2>
-                        <h3>Phone : {name.phone} Email : {name.email} </h3>
+                        <h3>Phone : {name.phone} </h3>
                         <br/>
                     </div>
                 )

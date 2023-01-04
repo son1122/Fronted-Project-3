@@ -1,139 +1,105 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Line } from '@ant-design/plots';
+import { Mix } from '@ant-design/plots';
 
 const DemoLine = () => {
-    const data = [
-        {
-            month: 'Jan',
-            key: 'series1',
-            value: 125,
-        },
-        {
-            month: 'Jan',
-            key: 'series2',
-            value: 51,
-        },
-        {
-            month: 'Feb',
-            key: 'series1',
-            value: 132,
-        },
-        {
-            month: 'Feb',
-            key: 'series2',
-            value: 91,
-        },
-        {
-            month: 'Mar',
-            key: 'series1',
-            value: 141,
-        },
-        {
-            month: 'Mar',
-            key: 'series2',
-            value: 34,
-        },
-        {
-            month: 'Apr',
-            key: 'series1',
-            value: 158,
-        },
-        {
-            month: 'Apr',
-            key: 'series2',
-            value: 47,
-        },
-        {
-            month: 'May',
-            key: 'series1',
-            value: 133,
-        },
-        {
-            month: 'May',
-            key: 'series2',
-            value: 63,
-        },
-        {
-            month: 'June',
-            key: 'series1',
-            value: 143,
-        },
-        {
-            month: 'June',
-            key: 'series2',
-            value: 58,
-        },
-        {
-            month: 'July',
-            key: 'series1',
-            value: 176,
-        },
-        {
-            month: 'July',
-            key: 'series2',
-            value: 56,
-        },
-        {
-            month: 'Aug',
-            key: 'series1',
-            value: 194,
-        },
-        {
-            month: 'Aug',
-            key: 'series2',
-            value: 77,
-        },
-        {
-            month: 'Sep',
-            key: 'series1',
-            value: 115,
-        },
-        {
-            month: 'Sep',
-            key: 'series2',
-            value: 99,
-        },
-        {
-            month: 'Oct',
-            key: 'series1',
-            value: 134,
-        },
-        {
-            month: 'Oct',
-            key: 'series2',
-            value: 106,
-        },
-        {
-            month: 'Nov',
-            key: 'series1',
-            value: 110,
-        },
-        {
-            month: 'Nov',
-            key: 'series2',
-            value: 88,
-        },
-        {
-            month: 'Dec',
-            key: 'series1',
-            value: 91,
-        },
-        {
-            month: 'Dec',
-            key: 'series2',
-            value: 56,
-        },
-    ];
-    const config = {
-        data,
-        xField: 'month',
-        yField: 'value',
-        legend: false,
-        seriesField: 'key',
-        stepType: 'hvh',
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        asyncFetch();
+    }, []);
+
+    const asyncFetch = () => {
+        fetch('https://gw.alipayobjects.com/os/antfincdn/fKTgtjKdaN/association-pie.json')
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => {
+                console.log('fetch data failed', error);
+            });
     };
-    return <Line {...config} />;
+    if (!Object.keys(data).length) {
+        return null;
+    }
+    const config = {
+        // 关闭 chart 上的 tooltip，子 view 开启 tooltip
+        tooltip: false,
+        legend: true,
+        plots: [
+            {
+                type: 'pie',
+                region: {
+                    start: {
+                        x: 0,
+                        y: 0,
+                    },
+                    end: {
+                        x: 0.45,
+                        y: 1,
+                    },
+                },
+                options: {
+                    data: data.pie1,
+                    angleField: 'bill',
+                    colorField: 'area',
+                    radius: 0.85,
+                    tooltip: {
+                        showMarkers: false,
+                    },
+                    label: {
+                        type: 'inner',
+                        offset: '-15%',
+                    },
+                    interactions: [
+                        {
+                            type: 'element-active',
+                        },
+                        {
+                            type: 'association-tooltip',
+                        },
+                        {
+                            type: 'association-highlight',
+                        },
+                    ],
+                },
+            },
+            {
+                type: 'pie',
+                region: {
+                    start: {
+                        x: 0.55,
+                        y: 0,
+                    },
+                    end: {
+                        x: 1,
+                        y: 1,
+                    },
+                },
+                options: {
+                    data: data.pie2,
+                    radius: 0.85,
+                    angleField: 'value',
+                    colorField: 'area',
+                    label: {
+                        type: 'inner',
+                        offset: '-15%',
+                    },
+                    tooltip: {
+                        showMarkers: false,
+                    },
+                    interactions: [
+                        {
+                            type: 'association-tooltip',
+                        },
+                        {
+                            type: 'association-selected',
+                        },
+                    ],
+                },
+            },
+        ],
+    };
+
+    return <Mix {...config} />;
 };
 
 export default DemoLine

@@ -150,7 +150,7 @@ const Summary = (props) => {
       style={{
         display: "grid",
         gridTemplateColumns: "50% 50%",
-        gridTemplateRows: "50% 50% 50% 50%",
+        gridTemplateRows: "40% 40% 40%",
         overflow: "scroll",
         position: "relative",
         padding: "5%",
