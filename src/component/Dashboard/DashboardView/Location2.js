@@ -120,7 +120,7 @@ export default function Location() {
   const [tag, setTag] = useState(
     <div style={{ height: "90vh", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyCSFKSxVPPBC2iwdNQ58GRCfhdlnDFbgtI" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_API }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
