@@ -1,5 +1,5 @@
 .table-grid {
-  display: grid;
-  grid-template-columns: 80vw auto;
-  height: 100%;
+    display: grid;
+    grid-template-columns: 80vw auto;
+    height: 100%;
 }

@@ -1,64 +1,67 @@
 .dashboard-grid {
-  display: grid;
-  grid-template-columns: 80vw auto;
-  height: 100%;
+    display: grid;
+    grid-template-columns: 80vw auto;
+    height: 100%;
 }
+
 .dashboard-grid-half {
-  display: grid;
-  grid-template-columns: 50% 50%;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 .summary-canvas::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .customer-list-container {
-  background-color: #fafafa;
-  /* padding: 2rem; */
-  overflow: scroll;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
+    background-color: #fafafa;
+    /* padding: 2rem; */
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
 }
+
 .customer-list-container::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
+
 .customer-item-container {
-  background-color: #ff2531;
-  width: 400px;
-  height: 300px;
-  color: #fff;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  -moz-box-shadow: 0 0 3px #ccc;
-  -webkit-box-shadow: 0 0 3px #ccc;
-  box-shadow: 0 0 3px #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* margin-bottom: 100px; */
+    background-color: #ff2531;
+    width: 400px;
+    height: 300px;
+    color: #fff;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* margin-bottom: 100px; */
 }
 
 .summary-loading-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .seller-list-item {
-  margin-left: 20px;
-  margin-right: 20px;
-  background-color: #ff2531;
-  color: #fff;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  line-height: 0%;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #ff2531;
+    color: #fff;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 0%;
 }

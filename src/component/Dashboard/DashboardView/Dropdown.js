@@ -1,6 +1,7 @@
 import React from 'react';
-import { DownOutlined } from '@ant-design/icons';
-import { Dropdown, Space, Typography } from 'antd';
+import {DownOutlined} from '@ant-design/icons';
+import {Dropdown, Space, Typography} from 'antd';
+
 const items = [
     {
         key: '1',
@@ -15,7 +16,7 @@ const items = [
         label: 'Item 3',
     },
 ];
-const Drop= () => (
+const Drop = () => (
     <Dropdown
         menu={{
             items,
@@ -26,7 +27,7 @@ const Drop= () => (
         <Typography.Link>
             <Space>
                 Selectable
-                <DownOutlined />
+                <DownOutlined/>
             </Space>
         </Typography.Link>
     </Dropdown>

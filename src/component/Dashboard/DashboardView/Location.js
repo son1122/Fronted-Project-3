@@ -16,11 +16,12 @@
 // [START maps_react_map]
 
 import * as React from "react";
-import { createRoot } from "react-dom/client";
-import { Wrapper } from "@googlemaps/react-wrapper";
-import { createCustomEqual } from "fast-equals";
-import { isLatLngLiteral } from "@googlemaps/typescript-guards";
+import {createRoot} from "react-dom/client";
+import {Wrapper} from "@googlemaps/react-wrapper";
+import {createCustomEqual} from "fast-equals";
+import {isLatLngLiteral} from "@googlemaps/typescript-guards";
 import Summary from "./Summary";
+
 const render = (status) => {
     return <h1>{status}</h1>;
 };
@@ -66,7 +67,7 @@ const Location = () => {
                 value={zoom}
                 onChange={(event) => setZoom(Number(event.target.value))}
             />
-            <br />
+            <br/>
             <label htmlFor="lat">Latitude</label>
             <input
                 type="number"
@@ -74,10 +75,10 @@ const Location = () => {
                 name="lat"
                 value={center.lat}
                 onChange={(event) =>
-                    setCenter({ ...center, lat: Number(event.target.value) })
+                    setCenter({...center, lat: Number(event.target.value)})
                 }
             />
-            <br />
+            <br/>
             <label htmlFor="lng">Longitude</label>
             <input
                 type="number"
@@ -85,7 +86,7 @@ const Location = () => {
                 name="lng"
                 value={center.lng}
                 onChange={(event) =>
-                    setCenter({ ...center, lng: Number(event.target.value) })
+                    setCenter({...center, lng: Number(event.target.value)})
                 }
             />
             <h3>{clicks.length === 0 ? "Click on map to add markers" : "Clicks"}</h3>
@@ -97,17 +98,17 @@ const Location = () => {
     );
     // [START maps_react_map_component_app_return]
     return (
-        <div style={{ display: "flex", height: "100%" }}>
+        <div style={{display: "flex", height: "100%"}}>
             <Wrapper apiKey={"AIzaSyDWvNicZvHNKI4ZLMvb7t1URumeoexMrGU"} render={render}>
                 <Map
                     center={center}
                     onClick={onClick}
                     onIdle={onIdle}
                     zoom={zoom}
-                    style={{ flexGrow: "1", height: "100%" }}
+                    style={{flexGrow: "1", height: "100%"}}
                 >
                     {clicks.map((latLng, i) => (
-                        <Marker key={i} position={latLng} />
+                        <Marker key={i} position={latLng}/>
                     ))}
                 </Map>
             </Wrapper>
@@ -118,7 +119,7 @@ const Location = () => {
     // [END maps_react_map_component_app_return]
 };
 export default Location;
-const Map = ({ onClick, onIdle, children, style, ...options }) => {
+const Map = ({onClick, onIdle, children, style, ...options}) => {
     // [START maps_react_map_component_add_map_hooks]
     const ref = React.useRef(null);
     const [map, setMap] = React.useState();
@@ -158,12 +159,12 @@ const Map = ({ onClick, onIdle, children, style, ...options }) => {
     // [START maps_react_map_component_return]
     return (
         <>
-            <div ref={ref} style={style} />
+            <div ref={ref} style={style}/>
             {React.Children.map(children, (child) => {
                 if (React.isValidElement(child)) {
                     // set the map prop on the child component
                     // @ts-ignore
-                    return React.cloneElement(child, { map });
+                    return React.cloneElement(child, {map});
                 }
             })}
         </>

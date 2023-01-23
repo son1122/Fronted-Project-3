@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import { Mix } from '@ant-design/plots';
+import {Mix} from '@ant-design/plots';
 
-import { DataView } from '@antv/data-set';
+import {DataView} from '@antv/data-set';
 
 const DemoMix = () => {
     const data = [

@@ -1,5 +1,6 @@
 let map;
 const google = window.google
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(-33.91722, 151.23064),
@@ -104,7 +105,8 @@ function initMap() {
             position: features[i].position,
             icon: icons[features[i].type].icon,
             map: map,
-        });s
+        });
+        s
     }
 }
 

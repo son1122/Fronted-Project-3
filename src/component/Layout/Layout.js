@@ -13,7 +13,7 @@ const Layout = (props) => {
 
     return (
         <div className={"layout-grid"}>
-            {props.login?(<View/>):<NotFound/>}
+            {props.login ? (<View/>) : <NotFound/>}
             <Navbar/>
         </div>
     );
